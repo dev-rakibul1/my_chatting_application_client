@@ -1,7 +1,13 @@
 .feed {
   flex: 5;
+  overflow-y: scroll;
+  height: 100vh;
 }
 
 .feed-wrapper {
   padding: 15px;
+}
+
+.feed::-webkit-scrollbar {
+  width: 0px !important;
 }

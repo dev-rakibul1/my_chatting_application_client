@@ -1,0 +1,91 @@
+.post {
+  width: 100%;
+  margin: 30px 0;
+  margin-top: 50px;
+}
+
+.post-wrapper {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.post-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.poster-title-img {
+  display: flex;
+  align-items: center;
+}
+
+.post-top-profile {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.post-top-right {
+  cursor: pointer;
+}
+
+.user-post-name {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.user-post-date {
+  font-size: 11px;
+  display: block;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+.post-public-icon {
+  font-size: 12px;
+  margin-left: 5px;
+}
+.post-image {
+  max-width: 100%;
+  border-radius: 7px;
+  object-fit: contain;
+  margin: 15px 0;
+}
+
+.user-post-paragraph {
+  font-size: 15px;
+  font-weight: 300;
+  margin: 20px 0;
+}
+
+.post-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-bottom-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.like-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.post-like-counter {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.post-comments {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 400;
+}
