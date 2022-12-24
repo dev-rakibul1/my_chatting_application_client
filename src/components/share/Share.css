@@ -1,0 +1,60 @@
+.share {
+  width: 100%;
+  height: 170px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+}
+
+.share-profile-image {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
+.share-wrapper {
+  padding: 10px;
+}
+
+.share-top {
+  display: flex;
+  align-items: center;
+}
+
+.share-input {
+  width: 100%;
+  border: none;
+}
+.share-input:focus {
+  outline: none;
+}
+
+.share-hr {
+  margin: 20px 0;
+}
+
+.share-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.share-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.share-option-text {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}

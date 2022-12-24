@@ -42,7 +42,7 @@
   width: 90%;
   height: 34px;
   border: none;
-  font-size: 18px;
+  font-size: 15px;
 }
 .searchInput:focus {
   outline: none;
