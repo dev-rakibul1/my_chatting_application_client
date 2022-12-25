@@ -1,0 +1,40 @@
+.right-bar-friend {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  transition: 0.1s all ease-in-out;
+  border-radius: 7px;
+}
+.right-bar-profile-fn-img {
+  position: relative;
+}
+
+.right-bar-friend:hover {
+  background-color: #d0d0d7;
+  cursor: pointer;
+}
+
+.right-bar-profile-fn-img .right-bar-fn-img {
+  /* max-width: 100%; */
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.right-bar-online {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background-color: green;
+  border-radius: 100%;
+  border: 1px solid #fff;
+}
+
+.right-bar-username {
+  font-size: 15px;
+  font-weight: 500;
+}

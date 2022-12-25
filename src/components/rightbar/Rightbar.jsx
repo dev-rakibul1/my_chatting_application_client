@@ -1,4 +1,6 @@
 import { Add, MoreVert } from "@mui/icons-material";
+import { Users } from "../../dummyData";
+import Online from "../online/Online";
 import "./Rightbar.css";
 
 const Rightbar = () => {
@@ -25,75 +27,16 @@ const Rightbar = () => {
         </div>
         <ul className="right-bar-friend-list">
           {/* active friend 01 */}
-          <li className="right-bar-friend">
-            <div className="right-bar-profile-fn-img">
-              <img
-                src="/assets/person/6.jpeg"
-                className="right-bar-fn-img"
-                alt="active friend"
-              />
-              <div className="right-bar-online"></div>
-            </div>
-            <div className="right-bar-username">John Doe</div>
-          </li>
-
-          {/* active friend 01 */}
-          <li className="right-bar-friend">
-            <div className="right-bar-profile-fn-img">
-              <img
-                src="/assets/person/7.jpeg"
-                className="right-bar-fn-img"
-                alt="active friend"
-              />
-              <div className="right-bar-online"></div>
-            </div>
-            <div className="right-bar-username">Jel fin</div>
-          </li>
-
-          {/* active friend 01 */}
-          <li className="right-bar-friend">
-            <div className="right-bar-profile-fn-img">
-              <img
-                src="/assets/person/8.jpeg"
-                className="right-bar-fn-img"
-                alt="active friend"
-              />
-              <div className="right-bar-online"></div>
-            </div>
-            <div className="right-bar-username">Hoy Tom</div>
-          </li>
-
-          {/* active friend 01 */}
-          <li className="right-bar-friend">
-            <div className="right-bar-profile-fn-img">
-              <img
-                src="/assets/person/9.jpeg"
-                className="right-bar-fn-img"
-                alt="active friend"
-              />
-              <div className="right-bar-online"></div>
-            </div>
-            <div className="right-bar-username">Jerry bin</div>
-          </li>
-
-          {/* active friend 01 */}
-          <li className="right-bar-friend">
-            <div className="right-bar-profile-fn-img">
-              <img
-                src="/assets/person/10.jpeg"
-                className="right-bar-fn-img"
-                alt="active friend"
-              />
-              <div className="right-bar-online"></div>
-            </div>
-            <div className="right-bar-username">Ketrin</div>
-          </li>
+          {Users?.map((user) => (
+            <Online key={user?.id} online={user} />
+          ))}
         </ul>
         <hr className="right-bar-hr" />
+
         {/* group conversations */}
         <h4 className="right-bar-active-title">Group conversations</h4>
         <ul className="right-bar-friend-list">
-          {/* active friend 01 */}
+          {/* group conversations 01 */}
           <li className="right-bar-friend">
             <div className="right-bar-profile-fn-img">
               <img
@@ -107,7 +50,7 @@ const Rightbar = () => {
             </div>
           </li>
 
-          {/* active friend 01 */}
+          {/* group conversations 02 */}
           <li className="right-bar-friend">
             <div className="right-bar-profile-fn-img">
               <img

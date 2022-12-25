@@ -9,6 +9,8 @@ import {
   School,
   Work,
 } from "@mui/icons-material";
+import { Users } from "../../dummyData";
+import CloseFriends from "../closeFriends/CloseFriends";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -75,41 +77,9 @@ const Sidebar = () => {
 
         {/* friend list */}
         <ul className="sidebar-friend-list">
-          <li className="sidebar-friend">
-            <img
-              className="sidebar-friend-image"
-              src="/assets/person/2.jpeg"
-              alt=""
-            />
-            <span className="sidebar-friend-name">Jane doe</span>
-          </li>
-
-          <li className="sidebar-friend">
-            <img
-              className="sidebar-friend-image"
-              src="/assets/person/2.jpeg"
-              alt=""
-            />
-            <span className="sidebar-friend-name">Jane doe</span>
-          </li>
-
-          <li className="sidebar-friend">
-            <img
-              className="sidebar-friend-image"
-              src="/assets/person/2.jpeg"
-              alt=""
-            />
-            <span className="sidebar-friend-name">Jane doe</span>
-          </li>
-
-          <li className="sidebar-friend">
-            <img
-              className="sidebar-friend-image"
-              src="/assets/person/2.jpeg"
-              alt=""
-            />
-            <span className="sidebar-friend-name">Jane doe</span>
-          </li>
+          {Users?.map((user) => (
+            <CloseFriends key={user?.id} user={user} />
+          ))}
         </ul>
       </div>
     </div>

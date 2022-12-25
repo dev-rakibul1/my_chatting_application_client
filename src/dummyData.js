@@ -1,51 +1,51 @@
 export const Users = [
   {
-    id:1,
+    id: 1,
     profilePicture: "assets/person/1.jpeg",
     username: "Safak Kocaoglu",
   },
   {
-    id:2,
+    id: 2,
     profilePicture: "assets/person/2.jpeg",
     username: "Janell Shrum",
   },
   {
-    id:3,
+    id: 3,
     profilePicture: "assets/person/3.jpeg",
     username: "Alex Durden",
   },
   {
-    id:4,
+    id: 4,
     profilePicture: "assets/person/4.jpeg",
     username: "Dora Hawks",
   },
   {
-    id:5,
+    id: 5,
     profilePicture: "assets/person/5.jpeg",
     username: "Thomas Holden",
   },
   {
-    id:6,
+    id: 6,
     profilePicture: "assets/person/6.jpeg",
     username: "Shirley Beauchamp",
   },
   {
-    id:7,
+    id: 7,
     profilePicture: "assets/person/7.jpeg",
     username: "Travis Bennett",
   },
   {
-    id:8,
+    id: 8,
     profilePicture: "assets/person/8.jpeg",
     username: "Kristen Thomas",
   },
   {
-    id:9,
+    id: 9,
     profilePicture: "assets/person/9.jpeg",
     username: "Gary Duty",
   },
   {
-    id:10,
+    id: 10,
     profilePicture: "assets/person/10.jpeg",
     username: "Safak Kocaoglu",
   },
@@ -54,15 +54,7 @@ export const Users = [
 export const Posts = [
   {
     id: 1,
-    desc: "Love For All, Hatred For None.",
-    photo: "assets/post/1.jpeg",
-    date: "5 mins ago",
-    userId: 1,
-    like: 32,
-    comment: 9,
-  },
-  {
-    id: 2,
+    desc: "An omelette is an egg dish that's folded in half and filled with cheese, meat, or vegetables. Next time you go out to breakfast, try ordering an omelette instead of your usual fried eggs! The word omelette is French, from a root meaning thin, small plate, a reference to an omelette's flat shape",
     photo: "assets/post/2.jpeg",
     date: "15 mins ago",
     userId: 2,
@@ -70,13 +62,22 @@ export const Posts = [
     comment: 1,
   },
   {
-    id: 3,
+    id: 2,
     desc: "Every moment is a fresh beginning.",
     photo: "assets/post/3.jpeg",
     date: "1 hour ago",
     userId: 3,
     like: 61,
     comment: 2,
+  },
+  {
+    id: 3,
+    desc: "Thanks for your feedback. I will be very excited about my feedback. I believe it helps me grow, and I achieved more knowledge and will apply again to your company. if you need a new employee in your company please select me or respond to me for the next job and I will be waiting for your next response. Take of care yourself. Thanks",
+    photo: "assets/post/1.jpeg",
+    date: "5 mins ago",
+    userId: 1,
+    like: 32,
+    comment: 9,
   },
   {
     id: 4,

@@ -56,25 +56,8 @@
   margin: 20px 0;
 }
 
-.sidebar-friend-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
 .sidebar-friend {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-}
-
-.sidebar-friend-image {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  border-radius: 100%;
-}
-
-.sidebar-friend-name {
-  margin-left: 10px;
 }
