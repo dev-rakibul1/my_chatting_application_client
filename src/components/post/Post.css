@@ -90,3 +90,34 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+.like-comment-hr {
+  margin: 20px 0;
+}
+
+.like-comment-handler {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.comment-handler,
+.like-handler {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+}
+.comment-icon,
+.like-thumb-icon {
+  margin-right: 7px;
+}
+.comment-text,
+.like-thumb-text {
+  font-size: 15px;
+  font: 500;
+}
+
+.liked-color {
+  color: green;
+}

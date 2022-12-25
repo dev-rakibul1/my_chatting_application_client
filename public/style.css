@@ -7,3 +7,8 @@ html,
 body {
   background-color: #f3ffff;
 }
+
+hr {
+  background-color: #ddd !important;
+  border: 0.1px solid #ddd;
+}
