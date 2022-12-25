@@ -8,6 +8,7 @@
   padding: 15px;
   background-color: #fff;
   border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
 .post-top {
@@ -44,7 +45,7 @@
   display: flex;
   align-items: center;
 }
-.post-public-icon {
+.user-post-date .post-public-icon {
   font-size: 12px;
   margin-left: 5px;
 }

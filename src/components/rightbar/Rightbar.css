@@ -1,3 +1,124 @@
 .rightbar {
   flex: 4;
+  max-width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.right-bar-birthday-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.right-bar-active-title {
+  margin: 20px 0;
+}
+
+.right-bar-hr {
+  margin: 20px 0;
+}
+
+.right-bar-wrapper {
+  padding: 15px;
+  max-width: 100%;
+}
+
+.birthday-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.birthday-container {
+  display: flex;
+  align-items: center;
+}
+
+.right-bar-active-friend-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right-active-bar-icons {
+  cursor: pointer;
+}
+
+.birthday-text {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.add-image {
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.right-bar-fn-img {
+  max-width: 100%;
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.right-bar-username {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.right-bar-friend-list {
+}
+.right-bar-profile-fn-img {
+  position: relative;
+}
+
+.right-bar-online {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background-color: green;
+  border-radius: 100%;
+  border: 1px solid #fff;
+}
+.right-bar-friend {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  transition: 0.1s all ease-in-out;
+  border-radius: 7px;
+}
+
+.right-bar-friend:hover {
+  background-color: #d0d0d7;
+  cursor: pointer;
+}
+
+.right-bar-create-new-group {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-top: 27px;
+  cursor: pointer;
+}
+
+.create-new-group-icon {
+  font-size: 50px;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #494949;
+  border-radius: 100%;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+.create-new-group-text {
+  color: #494949;
+  font-size: 18px;
 }
