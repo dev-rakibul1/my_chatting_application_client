@@ -57,6 +57,10 @@
   justify-content: space-around;
   color: #fff;
 }
+.topBar-item {
+  list-style: none;
+  color: #fff;
+}
 
 .topBar-links {
   display: flex;
@@ -65,13 +69,15 @@
   font: 14px;
   justify-content: space-between;
   cursor: pointer;
+  list-style: none;
+  color: #fff;
 }
 .topBarIcons {
   display: flex;
 }
 
 .topBarIconItem {
-  margin-right: 15px;
+  margin: 0 15px;
   cursor: pointer;
   position: relative;
 }
@@ -92,6 +98,7 @@
 
 .topBar-home {
   margin-right: 10px;
+  color: #fff;
 }
 
 .topBar-img {

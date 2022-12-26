@@ -1,0 +1,16 @@
+.layout-wrapper {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+}
+
+.layout-left {
+  flex: 3;
+}
+.layout-center {
+  flex: 6;
+}
+.layout-right {
+  flex: 3;
+}

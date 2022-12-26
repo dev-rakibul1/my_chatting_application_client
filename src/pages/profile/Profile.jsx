@@ -1,13 +1,11 @@
 import React from "react";
 import ProfileTabs from "../../components/profileTabs/ProfileTabs";
 import Sidebar from "../../components/sidebar/Sidebar";
-import TopBar from "../../components/TopBar";
 import "./Profile.css";
 
 const Profile = () => {
   return (
     <>
-      <TopBar />
       <div className="profile">
         <Sidebar />
         <div className="profile-right">
