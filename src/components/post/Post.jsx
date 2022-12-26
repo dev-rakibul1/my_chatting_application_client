@@ -1,4 +1,5 @@
 import { MoreVert, Public, Textsms, ThumbUp } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import { useState } from "react";
 import { Users } from "../../dummyData";
 import "./Post.css";
@@ -41,7 +42,9 @@ const Post = ({ post }) => {
             </div>
           </div>
           <div className="post-top-right">
-            <MoreVert />
+            <IconButton color="primary" aria-label="add to shopping cart">
+              <MoreVert />
+            </IconButton>
           </div>
         </div>
 

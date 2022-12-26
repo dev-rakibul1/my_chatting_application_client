@@ -1,0 +1,14 @@
+.register {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  padding: 0 15px;
+}
+
+.register-wrapper {
+  max-width: 100%;
+}

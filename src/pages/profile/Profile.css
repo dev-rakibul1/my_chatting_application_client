@@ -1,0 +1,59 @@
+.profile {
+  display: flex;
+  max-width: 80%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.profile::-webkit-scrollbar {
+  width: 0;
+}
+
+.profile-right {
+  flex: 9;
+}
+.profile-right-top {
+  margin-bottom: 130px;
+}
+
+.user-cover-photo-wrap {
+  position: relative;
+}
+
+.user-wrap {
+  position: absolute;
+  bottom: -100px;
+  left: 7%;
+  right: 0;
+}
+
+.user {
+  display: flex;
+  margin: auto;
+  align-items: flex-end;
+}
+.user .user-title {
+  font-weight: 700;
+  font-size: 30px;
+}
+.user .user-title span {
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.user-cover-photo {
+  max-width: 100%;
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.user-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100%;
+  border: 2px solid #fff;
+}

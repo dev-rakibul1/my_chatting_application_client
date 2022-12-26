@@ -1,0 +1,8 @@
+.vertical-tabs-items {
+  text-transform: capitalize !important;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: end !important;
+}

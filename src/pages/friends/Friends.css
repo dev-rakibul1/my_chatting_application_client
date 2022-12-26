@@ -1,0 +1,36 @@
+.friends-wrapper {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.friend-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friend-icons {
+  cursor: pointer;
+}
+
+.friends-images {
+  max-width: 100%;
+  max-height: 100%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 7px;
+  margin-right: 20px;
+}
+.friend-title {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.user-friend-count {
+  font-size: 15px;
+  font-weight: 400;
+}
