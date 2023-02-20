@@ -109,3 +109,51 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+/* chat search box */
+.chat-search {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 20px;
+  max-width: 100%;
+  width: 100%;
+}
+.chat-search:focus {
+  outline: none;
+}
+
+.chat-search-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 19px;
+}
+
+.chat-search-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-left: 1px solid #ddd;
+  padding-left: 15px;
+  z-index: 1;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  width: 50px;
+  height: 50px;
+}
+
+/*  top bar dropdown shape */
+/* .top-bar-dropdown {
+  position: relative;
+}
+
+#triangle-up-top-bar {
+  width: 0;
+  position: absolute;
+  top: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid red;
+} */
