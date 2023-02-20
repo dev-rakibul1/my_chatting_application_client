@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Rightbar from "../components/rightbar/Rightbar";
@@ -10,15 +11,21 @@ const Root = () => {
     <div className="layout">
       <TopBar />
       <div className="layout-wrapper">
-        <div className="layout-left">
+        <Box
+          className="layout-left"
+          sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+        >
           <Sidebar />{" "}
-        </div>
+        </Box>
         <div className="layout-center">
           <Outlet />
         </div>
-        <div className="layout-right">
+        <Box
+          className="layout-right"
+          sx={{ display: { xs: "none", sm: "block", md: "block" } }}
+        >
           <Rightbar />
-        </div>
+        </Box>
       </div>
     </div>
   );

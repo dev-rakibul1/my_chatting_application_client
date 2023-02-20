@@ -1,9 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import ProfileTabs from "../../components/profileTabs/ProfileTabs";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./Profile.css";
 
 const Profile = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const res = await axios.get(`/users?username=john`);
+      setUser(res?.data);
+    };
+    fetchUserData();
+  }, []);
+
+  console.log(user);
+
   return (
     <>
       <div className="profile">
@@ -27,7 +40,8 @@ const Profile = () => {
 
                   <div className="user-info">
                     <h1 className="user-title">
-                      Katrin <span>(Katrina Turquotte)</span>
+                      {/* <h1>Name is : {userData.username}</h1> */}
+                      {user?.username} <span>(Katrina Turquotte)</span>
                     </h1>
                     <span>1.7K Friends</span>
                   </div>

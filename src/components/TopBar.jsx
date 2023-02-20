@@ -37,7 +37,10 @@ const TopBar = () => {
       </div>
 
       {/* top bar center */}
-      <div className="topBar-center">
+      <Box
+        className="topBar-center"
+        sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+      >
         <div className="search-box">
           {/* top bar search box */}
           <Search className="search-icon" />
@@ -48,7 +51,7 @@ const TopBar = () => {
             placeholder="Search my chat..."
           />
         </div>
-      </div>
+      </Box>
 
       {/* top bar right */}
       <div className="topBar-right">

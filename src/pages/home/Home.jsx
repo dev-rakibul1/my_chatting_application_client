@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <div className="homeContainer">
-        <Feed />
+        <Feed username="john" />
       </div>
     </>
   );

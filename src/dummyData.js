@@ -1,7 +1,7 @@
 export const Users = [
   {
     id: 1,
-    profilePicture: "assets/person/1.jpeg",
+    profilePicture: "https://i.ibb.co/cQ28Lqf/ezgif-com-gif-maker-6.jpg",
     username: "Safak Kocaoglu",
   },
   {
@@ -55,11 +55,14 @@ export const Posts = [
   {
     id: 1,
     desc: "An omelette is an egg dish that's folded in half and filled with cheese, meat, or vegetables. Next time you go out to breakfast, try ordering an omelette instead of your usual fried eggs! The word omelette is French, from a root meaning thin, small plate, a reference to an omelette's flat shape",
-    photo: "assets/post/2.jpeg",
+    photo: "https://i.ibb.co/Jkt2dHY/12.jpg",
     date: "15 mins ago",
     userId: 2,
     like: 2,
     comment: 1,
+    // id: 10,
+    profilePicture: "assets/person/10.jpeg",
+    username: "Safak Kocaoglu",
   },
   {
     id: 2,
@@ -69,6 +72,9 @@ export const Posts = [
     userId: 3,
     like: 61,
     comment: 2,
+    // id: 9,
+    profilePicture: "assets/person/9.jpeg",
+    username: "Gary Duty",
   },
   {
     id: 3,
@@ -78,6 +84,9 @@ export const Posts = [
     userId: 1,
     like: 32,
     comment: 9,
+    // id: 8,
+    profilePicture: "assets/person/8.jpeg",
+    username: "Kristen Thomas",
   },
   {
     id: 4,
@@ -86,6 +95,9 @@ export const Posts = [
     userId: 4,
     like: 7,
     comment: 3,
+    // id: 7,
+    profilePicture: "assets/person/7.jpeg",
+    username: "Travis Bennett",
   },
   {
     id: 5,
@@ -94,6 +106,9 @@ export const Posts = [
     userId: 5,
     like: 23,
     comment: 5,
+    // id: 6,
+    profilePicture: "assets/person/6.jpeg",
+    username: "Shirley Beauchamp",
   },
   {
     id: 6,
@@ -102,6 +117,9 @@ export const Posts = [
     userId: 6,
     like: 44,
     comment: 6,
+    // id: 5,
+    profilePicture: "assets/person/5.jpeg",
+    username: "Thomas Holden",
   },
   {
     id: 7,
@@ -111,6 +129,9 @@ export const Posts = [
     userId: 7,
     like: 52,
     comment: 3,
+    // id: 4,
+    profilePicture: "assets/person/4.jpeg",
+    username: "Dora Hawks",
   },
   {
     id: 8,
@@ -119,6 +140,9 @@ export const Posts = [
     userId: 8,
     like: 15,
     comment: 1,
+    // id: 3,
+    profilePicture: "assets/person/3.jpeg",
+    username: "Alex Durden",
   },
   {
     id: 9,
@@ -128,6 +152,9 @@ export const Posts = [
     userId: 9,
     like: 11,
     comment: 2,
+    // id: 2,
+    profilePicture: "assets/person/2.jpeg",
+    username: "Janell Shrum",
   },
   {
     id: 10,
@@ -136,5 +163,8 @@ export const Posts = [
     userId: 10,
     like: 104,
     comment: 12,
+    // id: 1,
+    profilePicture: "https://i.ibb.co/cQ28Lqf/ezgif-com-gif-maker-6.jpg",
+    username: "Safak Kocaoglu",
   },
 ];

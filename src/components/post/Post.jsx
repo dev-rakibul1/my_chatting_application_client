@@ -1,21 +1,41 @@
-import { MoreVert, Public, Textsms, ThumbUp } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import {
+  EmojiEmotions,
+  MoreVert,
+  Public,
+  Textsms,
+  ThumbUp,
+} from "@mui/icons-material";
+import { IconButton, Typography } from "@mui/material";
 import { useState } from "react";
-import { Users } from "../../dummyData";
+import { format } from "timeago.js";
 import "./Post.css";
 
 const Post = ({ post }) => {
-  const { desc, photo, like, comment, date, userId } = post;
+  // const { desc, img, likes, comment, date, userId, user } = post;
+  const { id, desc, photo, date, like, comment, username, profilePicture } =
+    post;
+  const placeholderProfile =
+    "https://i.ibb.co/LY4tvxP/pngfind-com-placeholder-png-6104451.png";
 
   const [liked, setLiked] = useState(like);
   const [isLiked, setIsLiked] = useState(false);
   const [thumbLikeColor, SetThumbLikeColor] = useState(false);
+
+  const [userData, setUserData] = useState({});
 
   const likeHandle = () => {
     setLiked(isLiked ? liked - 1 : liked + 1);
     setIsLiked(!isLiked);
     SetThumbLikeColor(!thumbLikeColor);
   };
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     const res = await axios.get(`/users?userId=${userId}`);
+  //     setUserData(res?.data);
+  //   };
+  //   fetchUserData();
+  // }, [userId]);
 
   return (
     <div className="post">
@@ -25,24 +45,21 @@ const Post = ({ post }) => {
           <div className="post-top-left">
             <div className="poster-title-img">
               <img
-                src={
-                  Users.filter((user) => user.id === userId)[0].profilePicture
-                }
+                src={profilePicture}
                 alt="post-profile"
                 className="post-top-profile"
               />
               <div>
-                <span className="user-post-name">
-                  {Users.filter((user) => user.id === userId)[0].username}
-                </span>
+                <span className="user-post-name">{username && username}</span>
                 <span className="user-post-date">
-                  {date} <Public className="post-public-icon" />{" "}
+                  {format(userData?.createdAt)}{" "}
+                  <Public className="post-public-icon" />{" "}
                 </span>
               </div>
             </div>
           </div>
           <div className="post-top-right">
-            <IconButton color="primary" aria-label="add to shopping cart">
+            <IconButton color="green" aria-label="add to shopping cart">
               <MoreVert />
             </IconButton>
           </div>
@@ -51,7 +68,7 @@ const Post = ({ post }) => {
         {/* post center */}
         <div className="post-center">
           <p className="user-post-paragraph">{desc}</p>
-          <img src={photo} alt="post" className="post-image" />
+          <img src={photo} alt="" className="post-image" />
         </div>
 
         {/* post bottom */}
@@ -81,10 +98,175 @@ const Post = ({ post }) => {
             <ThumbUp className="like-thumb-icon" />
             <span className="like-thumb-text">Like</span>
           </div>
-          <div className="comment-handler">
+          <label htmlFor={`comment-${id}`} className="comment-handler">
             <Textsms className="comment-icon" />
             <span className="comment-text">Comment</span>
+          </label>
+        </div>
+
+        {/* comment box */}
+        <div className="comment-box">
+          <div className="comment-image">
+            <img
+              src="/assets/person/1.jpeg"
+              alt="post-profile"
+              className="post-top-profile"
+            />
           </div>
+          <input
+            type="text"
+            id={`comment-${id}`}
+            placeholder="Write a comment..."
+          />
+          <EmojiEmotions sx={{ cursor: "pointer" }} />
+        </div>
+
+        {/* recent comment */}
+        <div className="recent-comment-wrap">
+          <div className="recent-comments">
+            <div className="comment-image">
+              <img
+                src="/assets/person/1.jpeg"
+                alt="post-profile"
+                className="post-top-profile"
+              />
+            </div>
+            <span className="comment-user-title">Katrina Turquotte</span>
+          </div>
+
+          {/* actual comment */}
+          <article className="actual-comment">
+            <p>
+              Ekjoner certificate e deklam medal er motn golden ekta logo dewa
+              achievement likhatar pashe,,but amrtate kheyal korlam jinish ta
+              nei,,etar karon ta ki??
+            </p>
+            {/* reply */}
+            <div className="comment-reply-wrap">
+              <div className="comment-reply">
+                <span>Like</span>
+                <span>Reply</span>
+                <Typography
+                  variant="span"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Public sx={{ fontSize: "13px", marginRight: "3px" }} /> 2m
+                  ago
+                </Typography>
+              </div>
+
+              {/* reply like */}
+              <Typography
+                variant="span"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <ThumbUp sx={{ fontSize: "13px", marginRight: "5px" }} /> 5
+              </Typography>
+            </div>
+          </article>
+
+          {/* user second time reply */}
+          <div className="second-time-reply">
+            <div className="recent-comments">
+              <div className="comment-image">
+                <img
+                  src="/assets/person/1.jpeg"
+                  alt="post-profile"
+                  className="post-top-profile"
+                />
+              </div>
+              <span className="comment-user-title">Katrina Turquotte</span>
+            </div>
+            <article>
+              <p>Wow congratulations</p>
+              {/* reply */}
+              <div className="comment-reply-wrap">
+                <div className="comment-reply">
+                  <span>Like</span>
+                  <span>Reply</span>
+                  <Typography
+                    variant="span"
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Public sx={{ fontSize: "13px", marginRight: "3px" }} />{" "}
+                    just now
+                  </Typography>
+                </div>
+
+                {/* reply like */}
+                <Typography
+                  variant="span"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ThumbUp sx={{ fontSize: "13px", marginRight: "5px" }} /> 2
+                </Typography>
+              </div>
+            </article>
+          </div>
+
+          {/* actual comment */}
+          <div className="recent-comments">
+            <div className="comment-image">
+              <img
+                src="/assets/person/1.jpeg"
+                alt="post-profile"
+                className="post-top-profile"
+              />
+            </div>
+            <span className="comment-user-title">Katrina Turquotte</span>
+          </div>
+          <article className="actual-comment">
+            <p>
+              eder mail ei problem Bhai. Shudu Apni na. Amra onekei oder mail
+              korle mail jayna.
+            </p>
+            {/* reply */}
+            <div className="comment-reply-wrap">
+              <div className="comment-reply">
+                <span>Like</span>
+                <span>Reply</span>
+                <Typography
+                  variant="span"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Public sx={{ fontSize: "13px", marginRight: "3px" }} /> just
+                  now
+                </Typography>
+              </div>
+
+              {/* reply like */}
+              <Typography
+                variant="span"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <ThumbUp sx={{ fontSize: "13px", marginRight: "5px" }} /> 2
+              </Typography>
+            </div>
+          </article>
         </div>
       </div>
     </div>

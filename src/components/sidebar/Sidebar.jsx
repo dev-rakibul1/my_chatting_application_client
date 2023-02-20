@@ -9,6 +9,7 @@ import {
   School,
   Work,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import { Users } from "../../dummyData";
 import CloseFriends from "../closeFriends/CloseFriends";
 import "./Sidebar.css";
@@ -19,28 +20,36 @@ const Sidebar = () => {
       <div className="sidebar-wrapper">
         <ul className="sidebar-list">
           {/* items 01 */}
-          <li className="sidebar-items">
-            <RssFeed className="sidebar-icon" />
-            <span className="sidebar-list-item-text">Feed</span>
-          </li>
+          <Link to="/feedPages">
+            <li className="sidebar-items">
+              <RssFeed className="sidebar-icon" />
+              <span className="sidebar-list-item-text">Feed</span>
+            </li>
+          </Link>
 
           {/* items 02 */}
-          <li className="sidebar-items">
-            <Chat className="sidebar-icon" />
-            <span className="sidebar-list-item-text">Chats</span>
-          </li>
+          <Link to="/chats">
+            <li className="sidebar-items">
+              <Chat className="sidebar-icon" />
+              <span className="sidebar-list-item-text">Chats</span>
+            </li>
+          </Link>
 
           {/* items 03 */}
-          <li className="sidebar-items">
-            <PlayCircleFilled className="sidebar-icon" />
-            <span className="sidebar-list-item-text">Videos</span>
-          </li>
+          <Link to="/videos">
+            <li className="sidebar-items">
+              <PlayCircleFilled className="sidebar-icon" />
+              <span className="sidebar-list-item-text">Videos</span>
+            </li>
+          </Link>
 
           {/* items 04 */}
-          <li className="sidebar-items">
-            <Group className="sidebar-icon" />
-            <span className="sidebar-list-item-text">Groups</span>
-          </li>
+          <Link to="/groups">
+            <li className="sidebar-items">
+              <Group className="sidebar-icon" />
+              <span className="sidebar-list-item-text">Groups</span>
+            </li>
+          </Link>
 
           {/* items 05 */}
           <li className="sidebar-items">
@@ -55,10 +64,12 @@ const Sidebar = () => {
           </li>
 
           {/* items 07 */}
-          <li className="sidebar-items">
-            <Work className="sidebar-icon" />
-            <span className="sidebar-list-item-text">Jobs</span>
-          </li>
+          <Link to="/jobsPages">
+            <li className="sidebar-items">
+              <Work className="sidebar-icon" />
+              <span className="sidebar-list-item-text">Jobs</span>
+            </li>
+          </Link>
 
           {/* items 08 */}
           <li className="sidebar-items">
