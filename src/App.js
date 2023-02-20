@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/Router.jsx";
 function App() {
-  const [online, setOnline] = useState([]);
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const handleOffline = () => {
     setOpen(!open);
@@ -17,18 +17,12 @@ function App() {
     window.location.reload();
   };
 
-  const userOnline = (
+  const userOffline = (
     <>
       {" "}
       <Alert
         sx={{
-          width: "25%",
-          zIndex: "500",
-          position: "sticky",
-          bottom: "5%",
-          left: 0,
           color: "red",
-          mb: 2,
           backgroundColor: "#ffd3d3",
         }}
         action={
@@ -67,20 +61,40 @@ function App() {
     </>
   );
 
+  // user online offline check
   useEffect(() => {
-    const navigator = window.navigator.onLine;
-    if (navigator === false) {
-      setOnline(userOnline);
-    }
-  }, []);
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
 
-  console.log("online", online);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
 
-      {open ? <>{online}</> : undefined}
+      <Box
+        sx={{
+          zIndex: "500",
+          position: "sticky",
+          bottom: "5%",
+          left: 0,
+          color: "red",
+          mb: 2,
+          backgroundColor: "#ffd3d3",
+          display: "inline-block",
+        }}
+      >
+        {open ? (
+          <div>{isOnline ? undefined : <>{userOffline}</>}</div>
+        ) : undefined}
+      </Box>
     </>
   );
 }
