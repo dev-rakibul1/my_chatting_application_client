@@ -20,6 +20,8 @@ const Post = ({ post }) => {
   const [liked, setLiked] = useState(like);
   const [isLiked, setIsLiked] = useState(false);
   const [thumbLikeColor, SetThumbLikeColor] = useState(false);
+  const [userComments, setUserComments] = useState(false);
+  const [userSecondReply, setUserSecondReply] = useState(false);
 
   const [userData, setUserData] = useState({});
 
@@ -36,6 +38,13 @@ const Post = ({ post }) => {
   //   };
   //   fetchUserData();
   // }, [userId]);
+
+  const handleUserReply = () => {
+    setUserComments(!userComments);
+  };
+  const handleUserSecondTimeReply = () => {
+    setUserComments(!setUserSecondReply);
+  };
 
   return (
     <div className="post">
@@ -145,7 +154,7 @@ const Post = ({ post }) => {
             <div className="comment-reply-wrap">
               <div className="comment-reply">
                 <span>Like</span>
-                <span>Reply</span>
+                <span onClick={handleUserReply}>Reply</span>
                 <Typography
                   variant="span"
                   sx={{
@@ -191,7 +200,7 @@ const Post = ({ post }) => {
               <div className="comment-reply-wrap">
                 <div className="comment-reply">
                   <span>Like</span>
-                  <span>Reply</span>
+                  <span onClick={handleUserReply}>Reply</span>
                   <Typography
                     variant="span"
                     sx={{
@@ -218,6 +227,23 @@ const Post = ({ post }) => {
                 </Typography>
               </div>
             </article>
+            {userComments ? (
+              <div className="reply-comment-box">
+                <div className="comment-image">
+                  <img
+                    src="/assets/person/1.jpeg"
+                    alt="post-profile"
+                    className="post-top-profile"
+                  />
+                </div>
+                <input
+                  type="text"
+                  id={`comment-${id}`}
+                  placeholder="Write a reply..."
+                />
+                <EmojiEmotions sx={{ cursor: "pointer" }} />
+              </div>
+            ) : undefined}
           </div>
 
           {/* actual comment */}

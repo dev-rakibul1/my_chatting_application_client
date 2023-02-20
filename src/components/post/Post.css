@@ -211,3 +211,19 @@
 .second-time-reply article p {
   font-size: 13px;
 }
+
+.reply-comment-box {
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.reply-comment-box input {
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.reply-comment-box input:focus {
+  outline: none;
+}
