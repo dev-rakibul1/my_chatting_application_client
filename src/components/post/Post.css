@@ -180,7 +180,7 @@
   justify-content: start;
   font-size: 12px;
 }
-
+.comment-reply label,
 .comment-reply span {
   margin-right: 10px;
   font-weight: 500;

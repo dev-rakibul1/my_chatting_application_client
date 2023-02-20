@@ -154,7 +154,9 @@ const Post = ({ post }) => {
             <div className="comment-reply-wrap">
               <div className="comment-reply">
                 <span>Like</span>
-                <span onClick={handleUserReply}>Reply</span>
+                <label htmlFor="handleUserReply" onClick={handleUserReply}>
+                  Reply
+                </label>
                 <Typography
                   variant="span"
                   sx={{
@@ -200,7 +202,9 @@ const Post = ({ post }) => {
               <div className="comment-reply-wrap">
                 <div className="comment-reply">
                   <span>Like</span>
-                  <span onClick={handleUserReply}>Reply</span>
+                  <label htmlFor="handleUserReply" onClick={handleUserReply}>
+                    Reply
+                  </label>
                   <Typography
                     variant="span"
                     sx={{
@@ -238,7 +242,7 @@ const Post = ({ post }) => {
                 </div>
                 <input
                   type="text"
-                  id={`comment-${id}`}
+                  id={`handleUserReply`}
                   placeholder="Write a reply..."
                 />
                 <EmojiEmotions sx={{ cursor: "pointer" }} />
