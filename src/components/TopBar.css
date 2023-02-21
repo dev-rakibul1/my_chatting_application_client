@@ -98,7 +98,6 @@
 }
 
 .topBar-home {
-  margin-right: 10px;
   color: #fff;
 }
 
@@ -143,17 +142,7 @@
   height: 50px;
 }
 
-/*  top bar dropdown shape */
-/* .top-bar-dropdown {
-  position: relative;
+/* Material ui class name style*/
+#demo-popup-popper {
+  box-shadow: 0px 1px 13px 6px #00000026;
 }
-
-#triangle-up-top-bar {
-  width: 0;
-  position: absolute;
-  top: 0;
-  height: 0;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-bottom: 100px solid red;
-} */
