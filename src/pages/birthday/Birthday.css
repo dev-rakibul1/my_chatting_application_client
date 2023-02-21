@@ -1,0 +1,79 @@
+.birthday-main {
+  max-width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.birthday-friend-wish {
+  padding: 0 15px;
+}
+.birthday-friend-wish article {
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.birthday-friend-list {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-right: 50px;
+}
+
+.birthday-friend-list p {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.birthday-friend {
+  max-width: 70px;
+  height: 70px;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.birthday-article {
+  display: flex;
+  align-items: center;
+}
+
+.birthday-article label {
+  color: green;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wish-message-box {
+  max-width: 100%;
+  width: 350px;
+  height: auto;
+  /* border: 1px solid #ddd; */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.wish-message-box:focus {
+  outline: none;
+}
+
+.wish-message-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday-wish-title {
+  text-align: center;
+  margin: 20px 0;
+  color: green;
+  font-weight: 300;
+  font-size: 29px;
+}

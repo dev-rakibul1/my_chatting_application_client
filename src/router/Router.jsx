@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProfileLayout from "../layout/ProfileLayout";
 import Root from "../layout/Root";
+import Birthday from "../pages/birthday/Birthday";
 import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
 import Chats from "../pages/sidebarPages/chats/Chats";
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/groups", element: <Groups /> },
       { path: "/jobsPages", element: <JobsPages /> },
       { path: "/videos", element: <Videos /> },
+      { path: "/birthday", element: <Birthday /> },
     ],
   },
 

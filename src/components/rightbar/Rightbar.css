@@ -32,6 +32,8 @@
 .birthday-container {
   display: flex;
   align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .right-bar-active-friend-wrapper {
@@ -76,4 +78,18 @@
 .create-new-group-text {
   color: #494949;
   font-size: 18px;
+}
+
+/* right-bar-birthday-wrap */
+
+.right-bar-birthday-wrap {
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.right-bar-birthday-wrap a {
+  text-decoration: none;
+  color: #333;
 }

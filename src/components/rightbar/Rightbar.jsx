@@ -1,4 +1,5 @@
 import { Add, MoreVert } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import "./Rightbar.css";
@@ -7,12 +8,16 @@ const Rightbar = () => {
   return (
     <div className="rightbar">
       <div className="right-bar-wrapper">
-        <h4 className="right-bar-birthday-title">Birthdays</h4>
-        <div className="birthday-container">
-          <img src="/assets/gift.png" alt="" className="birthday-image" />
-          <span className="birthday-text">
-            <strong>Alina</strong> and 3 other people birthday today.
-          </span>
+        <div className="right-bar-birthday-wrap">
+          <h4 className="right-bar-birthday-title">Birthdays</h4>
+          <Link to="/birthday">
+            <div className="birthday-container">
+              <img src="/assets/gift.png" alt="" className="birthday-image" />
+              <span className="birthday-text">
+                <strong>Alina</strong> and 3 other people birthday today.
+              </span>
+            </div>
+          </Link>
         </div>
 
         {/* add */}
