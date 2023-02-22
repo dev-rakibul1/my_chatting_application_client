@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import "./Birthday.css";
-const birthdayCover = "https://i.ibb.co/Yt2zryp/birthday-cover.jpg";
+const birthdayCover = "https://i.ibb.co/k2vjTXg/birthday-cover-photo.png";
 
 const Birthday = () => {
   return (

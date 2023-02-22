@@ -3,6 +3,12 @@
   height: 100vh;
   overflow-y: scroll;
 }
+.birthday-cover-image {
+  padding: 0 10px;
+}
+.birthday-cover-image img {
+  border-radius: 5px;
+}
 
 .birthday-friend-wish {
   padding: 0 15px;
@@ -51,11 +57,11 @@
   cursor: pointer;
 }
 
-.wish-message-box {
+.wish-message-box textarea {
   max-width: 100%;
   width: 350px;
   height: auto;
-  /* border: 1px solid #ddd; */
+  border: 1px solid #ddd;
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;

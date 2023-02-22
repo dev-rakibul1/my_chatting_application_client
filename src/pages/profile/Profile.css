@@ -2,8 +2,8 @@
   display: flex;
   max-width: 80%;
   margin: 0 auto;
-  height: 100vh;
-  overflow-y: scroll;
+  /* height: 100vh;
+  overflow-y: scroll; */
 }
 
 .profile::-webkit-scrollbar {
@@ -56,4 +56,86 @@
   object-fit: cover;
   border-radius: 100%;
   border: 2px solid #fff;
+}
+
+/* profile-picture */
+.profile-picture {
+  position: relative;
+}
+.profile-photo-upload-icon {
+  position: absolute;
+  right: 13px;
+  bottom: 18px;
+  background: #d8d8d8;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+/* images upload */
+.preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 540px;
+  max-width: 100%;
+}
+
+.preview-image {
+  max-height: 400px;
+  max-width: 100%;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: block;
+  padding: 10px;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.file-upload-icon-wrap {
+  width: 350px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.file-upload-icon {
+  font-size: 60px;
+  width: 80px !important;
+  height: 80px !important;
+  border: 2px solid #ddd;
+  border-radius: 100%;
+  padding: 25px;
+  color: gray;
+}
+
+/* cover-photo-wrap */
+.cover-photo-wrap {
+  position: relative;
+}
+
+.cover-photo-icon-wrap {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #fff;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 5;
+  font-size: 14px;
+  font-weight: 400px;
 }

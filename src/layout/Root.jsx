@@ -13,7 +13,7 @@ const Root = () => {
       <div className="layout-wrapper">
         <Box
           className="layout-left"
-          sx={{ display: { xs: "none", sm: "none", md: "block" } }}
+          sx={{ display: { xs: "none", sm: "none", md: "none", lg: "block", xl: "block" } }}
         >
           <Sidebar />{" "}
         </Box>

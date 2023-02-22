@@ -1,11 +1,12 @@
 import {
   Chat,
+  Groups,
   Home,
   MoreVert,
   Notifications,
   Person,
   Public,
-  Search,
+  Search
 } from "@mui/icons-material";
 import "./TopBar.css";
 
@@ -29,6 +30,8 @@ import Typography from "@mui/material/Typography";
 import PopupState, { bindPopper, bindToggle } from "material-ui-popup-state";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import Rightbar from "./rightbar/Rightbar";
+import SidebarList from "./sidebar/SidebarList";
 
 const TopBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -448,8 +451,6 @@ const TopBar = () => {
             )}
           </PopupState>
 
-          {/* *********************** */}
-
           {/* person notification*/}
           <PopupState
             variant="popper"
@@ -606,9 +607,76 @@ const TopBar = () => {
               </div>
             )}
           </PopupState>
+
+          {/* group and active people menu */}
+
+          <Box
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+                md: "none",
+                lg: "none",
+                xl: "none",
+              },
+            }}
+          >
+            <PopupState
+              variant="popper"
+              popupId="demo-popup-popper"
+              style={{ boxShadow: "1px 2px 1pc #000" }}
+            >
+              {(popupState) => (
+                <div>
+                  <Box {...bindToggle(popupState)}>
+                    <Tooltip title="Active friends">
+                      <div className="topBarIconItem">
+                        <Groups className="topBar-home" />
+                      </div>
+                    </Tooltip>
+                  </Box>
+                  <Popper {...bindPopper(popupState)} transition>
+                    {({ TransitionProps }) => (
+                      <Fade {...TransitionProps} timeout={350}>
+                        <Paper style={{ maxWidth: "100%", width: "320px" }}>
+                          <Box
+                            sx={{
+                              p: 2,
+                              backgroundColor: "#fff",
+                            }}
+                          >
+                            {/* user chat title */}
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                                Active friends
+                              </Typography>
+                              <IconButton
+                                color="green"
+                                aria-label="add to shopping cart"
+                              >
+                                <MoreVert />
+                              </IconButton>
+                            </Box>
+                          </Box>
+
+                          <Rightbar />
+                        </Paper>
+                      </Fade>
+                    )}
+                  </Popper>
+                </div>
+              )}
+            </PopupState>
+          </Box>
         </div>
 
-        {/* profile picture */}
+        {/* profile picture and setting */}
         <div className="topBarIconItem">
           <Box
             sx={{
@@ -691,6 +759,22 @@ const TopBar = () => {
               </ListItemIcon>
               Settings
             </MenuItem>
+
+            <Box
+              sx={{
+                px: 2,
+                display: {
+                  xs: "block",
+                  sm: "block",
+                  md: "block",
+                  lg: "none",
+                  xl: "none",
+                },
+              }}
+            >
+              <SidebarList />
+            </Box>
+
             <MenuItem>
               <ListItemIcon>
                 <Logout fontSize="small" />
