@@ -15,6 +15,7 @@ import {
   Public,
   Room,
 } from "@mui/icons-material";
+import { Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Share.css";
 
@@ -99,32 +100,158 @@ const Share = () => {
             <div className="share-bottom">
               <div className="share-options">
                 {/* photo and video */}
-                <div className="share-option">
-                  <PermMedia htmlColor="green" className="share-icon" />
-                  <span className="share-option-text">Photo or Video</span>
-                </div>
+                <Tooltip title="Photo or Video">
+                  <div className="share-option">
+                    <PermMedia
+                      htmlColor="green"
+                      className="share-icon"
+                      sx={{
+                        marginRight: "10px",
+                      }}
+                    />
+
+                    {/* <span className="share-option-text">Photo or Video</span> */}
+                    <Typography
+                      variant="span"
+                      sx={{
+                        fontSize: {
+                          xs: "10px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "14px",
+                          xl: "14px",
+                        },
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                          md: "block",
+                          lg: "block",
+                          xl: "block",
+                        },
+                      }}
+                      className="share-option-text"
+                    >
+                      Photo or Video
+                    </Typography>
+                  </div>
+                </Tooltip>
 
                 {/* Location */}
-                <div className="share-option">
-                  <Room htmlColor="tomato" className="share-icon" />
-                  <span className="share-option-text">Location</span>
-                </div>
+                <Tooltip title="Location">
+                  <div className="share-option">
+                    <Room
+                      htmlColor="tomato"
+                      className="share-icon"
+                      sx={{
+                        marginRight: "10px",
+                      }}
+                    />
+
+                    {/* <span className="share-option-text">Location</span> */}
+                    <Typography
+                      variant="span"
+                      sx={{
+                        fontSize: {
+                          xs: "10px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "14px",
+                          xl: "14px",
+                        },
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                          md: "block",
+                          lg: "block",
+                          xl: "block",
+                        },
+                      }}
+                      className="share-option-text"
+                    >
+                      Location
+                    </Typography>
+                  </div>
+                </Tooltip>
 
                 {/* Tags */}
-                <div className="share-option">
-                  <Label htmlColor="blue" className="share-icon" />
-                  <span className="share-option-text">Tags</span>
-                </div>
+                <Tooltip title="Tags">
+                  <div className="share-option">
+                    <Label
+                      htmlColor="blue"
+                      className="share-icon"
+                      sx={{
+                        marginRight: "10px",
+                      }}
+                    />
+
+                    {/* <span className="share-option-text">Tags</span> */}
+                    <Typography
+                      variant="span"
+                      sx={{
+                        fontSize: {
+                          xs: "10px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "14px",
+                          xl: "14px",
+                        },
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                          md: "block",
+                          lg: "block",
+                          xl: "block",
+                        },
+                      }}
+                      className="share-option-text"
+                    >
+                      Tags
+                    </Typography>
+                  </div>
+                </Tooltip>
 
                 {/* Feelings */}
-                <div className="share-option">
-                  <EmojiEmotions htmlColor="#FFD700" className="share-icon" />
-                  <span className="share-option-text">Feelings</span>
-                </div>
+                <Tooltip title="Feelings">
+                  <div className="share-option">
+                    <EmojiEmotions
+                      htmlColor="#FFD700"
+                      className="share-icon"
+                      sx={{
+                        marginRight: "10px",
+                      }}
+                    />
+
+                    {/* <span className="share-option-text">Feelings</span> */}
+                    <Typography
+                      variant="span"
+                      sx={{
+                        fontSize: {
+                          xs: "10px",
+                          sm: "14px",
+                          md: "14px",
+                          lg: "14px",
+                          xl: "14px",
+                        },
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                          md: "block",
+                          lg: "block",
+                          xl: "block",
+                        },
+                      }}
+                      className="share-option-text"
+                    >
+                      Feelings
+                    </Typography>
+                  </div>
+                </Tooltip>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Share post information Dialog */}
         <BootstrapDialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
@@ -133,6 +260,7 @@ const Share = () => {
           <BootstrapDialogTitle
             id="customized-dialog-title"
             onClose={handleClose}
+            sx={{ width: "100%" }}
           >
             Create post
           </BootstrapDialogTitle>
@@ -171,28 +299,152 @@ const Share = () => {
               <div className="share-bottom">
                 <div className="share-options">
                   {/* photo and video */}
-                  <div className="share-option">
-                    <PermMedia htmlColor="green" className="share-icon" />
-                    <span className="share-option-text">Photo or Video</span>
-                  </div>
+                  <Tooltip title="Photo or Video">
+                    <div className="share-option">
+                      <PermMedia
+                        htmlColor="green"
+                        className="share-icon"
+                        sx={{
+                          marginRight: "10px",
+                        }}
+                      />
+
+                      {/* <span className="share-option-text">Photo or Video</span> */}
+                      <Typography
+                        variant="span"
+                        sx={{
+                          fontSize: {
+                            xs: "10px",
+                            sm: "14px",
+                            md: "14px",
+                            lg: "14px",
+                            xl: "14px",
+                          },
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                            md: "block",
+                            lg: "block",
+                            xl: "block",
+                          },
+                        }}
+                        className="share-option-text"
+                      >
+                        Photo or Video
+                      </Typography>
+                    </div>
+                  </Tooltip>
 
                   {/* Location */}
-                  <div className="share-option">
-                    <Room htmlColor="tomato" className="share-icon" />
-                    <span className="share-option-text">Location</span>
-                  </div>
+                  <Tooltip title="Location">
+                    <div className="share-option">
+                      <Room
+                        htmlColor="tomato"
+                        className="share-icon"
+                        sx={{
+                          marginRight: "10px",
+                        }}
+                      />
+
+                      {/* <span className="share-option-text">Location</span> */}
+                      <Typography
+                        variant="span"
+                        sx={{
+                          fontSize: {
+                            xs: "10px",
+                            sm: "14px",
+                            md: "14px",
+                            lg: "14px",
+                            xl: "14px",
+                          },
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                            md: "block",
+                            lg: "block",
+                            xl: "block",
+                          },
+                        }}
+                        className="share-option-text"
+                      >
+                        Location
+                      </Typography>
+                    </div>
+                  </Tooltip>
 
                   {/* Tags */}
-                  <div className="share-option">
-                    <Label htmlColor="blue" className="share-icon" />
-                    <span className="share-option-text">Tags</span>
-                  </div>
+                  <Tooltip title="Tags">
+                    <div className="share-option">
+                      <Label
+                        htmlColor="blue"
+                        className="share-icon"
+                        sx={{
+                          marginRight: "10px",
+                        }}
+                      />
+
+                      {/* <span className="share-option-text">Tags</span> */}
+                      <Typography
+                        variant="span"
+                        sx={{
+                          fontSize: {
+                            xs: "10px",
+                            sm: "14px",
+                            md: "14px",
+                            lg: "14px",
+                            xl: "14px",
+                          },
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                            md: "block",
+                            lg: "block",
+                            xl: "block",
+                          },
+                        }}
+                        className="share-option-text"
+                      >
+                        Tags
+                      </Typography>
+                    </div>
+                  </Tooltip>
 
                   {/* Feelings */}
-                  <div className="share-option">
-                    <EmojiEmotions htmlColor="#FFD700" className="share-icon" />
-                    <span className="share-option-text">Feelings</span>
-                  </div>
+                  <Tooltip title="Feelings">
+                    <div className="share-option">
+                      <EmojiEmotions
+                        htmlColor="#FFD700"
+                        className="share-icon"
+                        sx={{
+                          marginRight: "10px",
+                        }}
+                      />
+
+                      {/* <span className="share-option-text">Feelings</span> */}
+                      <Typography
+                        variant="span"
+                        sx={{
+                          fontSize: {
+                            xs: "10px",
+                            sm: "14px",
+                            md: "14px",
+                            lg: "14px",
+                            xl: "14px",
+                          },
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                            md: "block",
+                            lg: "block",
+                            xl: "block",
+                          },
+                        }}
+                        className="share-option-text"
+                      >
+                        Feelings
+                      </Typography>
+                    </div>
+                  </Tooltip>
                 </div>
               </div>
             </div>

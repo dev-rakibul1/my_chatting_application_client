@@ -40,9 +40,9 @@
 }
 
 .share-bottom {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 
 .share-options {
@@ -63,4 +63,10 @@
   margin-left: 5px;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* material ui class */
+.MuiPaper-elevation24 {
+  width: 100% !important;
+  overflow: hidden;
 }
