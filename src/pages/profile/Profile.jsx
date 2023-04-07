@@ -98,7 +98,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="profile">
+      <div className="profile my-chat-container">
         <Box
           sx={{
             display: {

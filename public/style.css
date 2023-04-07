@@ -12,3 +12,13 @@ hr {
   background-color: #ddd !important;
   border: 0.1px solid #ddd;
 }
+
+.my-chat-container {
+  width: 1170px;
+  max-width: 100%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}

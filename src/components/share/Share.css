@@ -70,3 +70,25 @@
   width: 100% !important;
   overflow: hidden;
 }
+
+/* post-images-wrapper */
+.post-images-wrapper {
+  position: relative;
+}
+#post-input-images {
+  z-index: 5;
+  opacity: 0;
+  border: 1px solid red;
+  padding: 10px 0;
+  max-width: 150px;
+}
+
+.post-images-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 0;
+  justify-content: center;
+  align-items: center;
+}

@@ -3,8 +3,10 @@ import WifiOffIcon from "@mui/icons-material/WifiOff";
 import { Alert, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import router from "./router/Router.jsx";
+
 function App() {
   const [open, setOpen] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -95,6 +97,7 @@ function App() {
           <div>{isOnline ? undefined : <>{userOffline}</>}</div>
         ) : undefined}
       </Box>
+      <Toaster></Toaster>
     </>
   );
 }
