@@ -1,16 +1,8 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { LoadingButton } from "@mui/lab";
 
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import { styled } from "@mui/material/styles";
-import PropTypes from "prop-types";
-import * as React from "react";
-import { toast } from "react-hot-toast";
-
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 import {
   EmojiEmotions,
   Label,
@@ -19,8 +11,17 @@ import {
   Room,
 } from "@mui/icons-material";
 import { Tooltip, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import axios from "axios";
+import PropTypes from "prop-types";
+import * as React from "react";
+import { toast } from "react-hot-toast";
 import "./Share.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -64,6 +65,12 @@ BootstrapDialogTitle.propTypes = {
 const Share = () => {
   const [open, setOpen] = React.useState(false);
   const [isPostLoading, setIsPostLoading] = React.useState(false);
+  const [isPickerVisible, setPickerVisible] = React.useState(false);
+  const [currentEmoji, setCurrentEmoji] = React.useState(null);
+
+  function handleChange(event) {
+    setCurrentEmoji(event.target.value);
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -138,6 +145,20 @@ const Share = () => {
 
   return (
     <div className="share">
+      {/* ------------------- */}
+      {/* <p>{currentEmoji}</p> */}
+      {/* <button onClick={() => setPickerVisible(!isPickerVisible)}>Emoji</button> */}
+      {/* <div className={`${isPickerVisible ? "block" : "none"}`}>
+        <Picker
+          data={data}
+          previewPosition="none"
+          onEmojiSelect={(e) => {
+            setCurrentEmoji(e.native);
+            setPickerVisible(!isPickerVisible);
+          }}
+        ></Picker>
+      </div> */}
+      {/* ------------------- */}
       <div onClick={handleClickOpen}>
         <div className="share-wrapper">
           {/* share top */}
@@ -354,6 +375,7 @@ const Share = () => {
 
                 <div className="share-top">
                   {/* <input type="text" /> */}
+
                   <textarea
                     className="share-input"
                     name="postDescription"
@@ -362,6 +384,8 @@ const Share = () => {
                     rows="5"
                     placeholder="What's in your mind? Katrin..."
                     required
+                    value={currentEmoji}
+                    onChange={handleChange}
                   ></textarea>
                 </div>
 
@@ -490,9 +514,27 @@ const Share = () => {
                       </div>
                     </Tooltip>
 
+                    <div
+                      className={`emoji-wrapper ${
+                        isPickerVisible ? "d-block" : "d-none"
+                      }`}
+                    >
+                      <Picker
+                        data={data}
+                        previewPosition="none"
+                        onEmojiSelect={(e) => {
+                          setCurrentEmoji(e.native);
+                          setPickerVisible(!isPickerVisible);
+                        }}
+                      ></Picker>
+                    </div>
+
                     {/* Feelings */}
                     <Tooltip title="Feelings">
-                      <div className="share-option">
+                      <div
+                        className="share-option"
+                        onClick={() => setPickerVisible(!isPickerVisible)}
+                      >
                         <EmojiEmotions
                           htmlColor="#FFD700"
                           className="share-icon"

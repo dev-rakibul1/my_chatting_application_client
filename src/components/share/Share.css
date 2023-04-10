@@ -92,3 +92,45 @@
   justify-content: center;
   align-items: center;
 }
+
+/* user post text area */
+
+.share-top textarea {
+  resize: none;
+  font-size: 18px;
+  margin-top: 30px;
+  min-height: 150px;
+}
+.share-top textarea::placeholder {
+  color: #858585;
+}
+.share-top textarea:focus::placeholder {
+  color: #b3b3b3;
+}
+.share-top :where(.theme-emoji, .options) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feeling-emoji {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+.emoji-wrapper {
+  position: absolute;
+  top: 0;
+  right: 10%;
+  width: 50%;
+  height: 50px;
+}

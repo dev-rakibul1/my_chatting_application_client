@@ -61,7 +61,14 @@
   font-weight: 300;
   margin: 20px 0;
 }
-
+.user-post-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  height: auto;
+}
 .post-bottom {
   display: flex;
   justify-content: space-between;
@@ -128,6 +135,13 @@
   justify-content: start;
   align-items: center;
   margin-top: 25px;
+  position: relative;
+}
+.comment-box-emoji {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  transform: translateX(50%);
 }
 
 .comment-box input {
