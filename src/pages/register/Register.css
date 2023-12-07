@@ -1,14 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif !important;
+}
+html,
+body {
+  background-color: #f3ffff;
+}
+
+hr {
+  background-color: #ddd !important;
+  border: 0.1px solid #ddd;
+}
+
 .register {
-  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   margin: 0 auto;
-  border: 1px solid #ddd;
-  padding: 0 15px;
+  padding: 15px;
 }
 
 .register-wrapper {
   max-width: 100%;
+  border: 1px solid #ddd;
+  padding: 50px;
+  background: #fff;
+}
+
+.register-form-wrapper {
+  padding: 20px 0;
+}
+
+.register-input-control {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+}
+.register-radio-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+.register-input-control input {
+  width: 100%;
+  max-width: 100%;
+  height: 35px;
+  padding: 10px;
+  font-size: 15px;
+}
+.register-input-control input:focus {
+  outline: none;
+}
+.register-input-control .register-radio {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: -4px 0px;
+  font-weight: 300;
+}
+.register-input-control .register-radio label {
+  margin-left: 10px;
+}
+
+.register-icons-wrap {
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  width: 48px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-icons {
+  width: 30px;
+  height: 55px;
+  color: green;
+}
+
+.register-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.account-have-none {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Register layout */
+.register-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.my-chat-container {
+  width: 1170px;
+  max-width: 100%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.logo {
+  color: #fff;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.register-nav {
+  width: 100%;
+  height: 50px;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  margin-bottom: 20px;
+  z-index: 1090;
+}
+.nav-login-reg {
+  padding: 10px 15px;
+  background: #00a03c;
+  cursor: pointer;
+}
+
+.nav-login-reg a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* register nav footer */
+.register-footer {
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.register-nav-footer-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.register-nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.register-nav-footer li {
+  list-style-type: none;
+  margin-right: 15px;
+}
+
+.register-nav-footer li a {
+  color: #333;
+}
+
+.warngin-border {
+  border: 1px solid red !important;
+}
+
+.warning-text {
+  color: red !important;
 }

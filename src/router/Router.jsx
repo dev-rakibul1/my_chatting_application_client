@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProfileLayout from "../layout/ProfileLayout";
 import Root from "../layout/Root";
+import RegisterLayout from "../layout/registerLayout/RegisterLayout";
 import Birthday from "../pages/birthday/Birthday";
 import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
+import Register from "../pages/register/Register";
 import Chats from "../pages/sidebarPages/chats/Chats";
 import FeedPages from "../pages/sidebarPages/feedPage/FeedPages";
 import Groups from "../pages/sidebarPages/groups/Groups";
@@ -29,6 +31,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <ProfileLayout />,
     children: [{ path: "/profile", element: <Profile /> }],
+  },
+
+  {
+    path: "/register-layout",
+    element: <RegisterLayout />,
+    children: [{ path: "/register-layout/register", element: <Register /> }],
   },
 ]);
 

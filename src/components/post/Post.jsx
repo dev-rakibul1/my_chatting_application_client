@@ -10,9 +10,10 @@ import {
 import { IconButton, Typography } from "@mui/material";
 import { useState } from "react";
 import { format } from "timeago.js";
+import Spinner from "../../shared/spinner/Spinner";
 import "./Post.css";
 
-const Post = ({ post }) => {
+const Post = ({ post, isLoading }) => {
   const [isPickerVisible, setPickerVisible] = useState(false);
   const [currentEmoji, setCurrentEmoji] = useState(null);
 
@@ -20,7 +21,16 @@ const Post = ({ post }) => {
     setCurrentEmoji(event.target.value);
   }
 
-  const { description, image, comments, likes, _id, createdAt } = post;
+  const {
+    description,
+    comments,
+    postImages,
+    likes,
+    id: _id,
+    createdAt,
+    user,
+  } = post;
+  console.log("post image", postImages);
 
   const placeholderProfile =
     "https://i.ibb.co/LY4tvxP/pngfind-com-placeholder-png-6104451.png";
@@ -35,28 +45,8 @@ const Post = ({ post }) => {
     SetThumbLikeColor(!thumbLikeColor);
   };
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     const res = await axios.get(`/users?userId=${userId}`);
-  //     setUserData(res?.data);
-  //   };
-  //   fetchUserData();
-  // }, [userId]);
-
-  // axios
-  //   .get("http://localhost:1000/api/v1/posts")
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-
   const [userId, setUserId] = useState("");
   const commentsUrl = `/v1/posts/user-comments/${userId}`;
-
-  // console.log(userId);
-  // console.log(commentsUrl);
 
   // create random id for comment
   function generateRandomId() {
@@ -88,8 +78,6 @@ const Post = ({ post }) => {
     const form = event.target;
     const userPrimaryComments = form.userPrimaryComments.value;
     const demo = form.demo;
-    // const userSecondaryComments = form.userSecondaryComments.value;
-    // console.log(userSecondaryComments);
 
     console.log("demo", demo);
 
@@ -118,40 +106,25 @@ const Post = ({ post }) => {
     setUserId(id);
   };
 
-  // const replyCommentBox = (
-  //   <>
-  //     <div className="reply-comment-box">
-  //       <div className="comment-image">
-  //         <img
-  //           src="/assets/person/1.jpeg"
-  //           alt="post-profile"
-  //           className="post-top-profile"
-  //         />
-  //       </div>
-  //       <input
-  //         type="text"
-  //         placeholder="Write a reply..."
-  //         name="userSecondaryComments"
-  //       />
-  //       <EmojiEmotions sx={{ cursor: "pointer" }} />
-  //     </div>
-  //   </>
-  // );
-
   return (
     <div className="post">
       <div className="post-wrapper">
+        {isLoading && <Spinner />}
         {/* post top */}
         <div className="post-top">
           <div className="post-top-left">
             <div className="poster-title-img">
               <img
-                src={placeholderProfile}
+                src={
+                  user?.profilePicture
+                    ? user?.profilePicture
+                    : placeholderProfile
+                }
                 alt="post-profile"
                 className="post-top-profile"
               />
               <div>
-                <span className="user-post-name">John Doe</span>
+                <span className="user-post-name">{`${user?.firstName} ${user?.middleName} ${user?.lastName}`}</span>
                 <span className="user-post-date">
                   {format(createdAt)} <Public className="post-public-icon" />{" "}
                 </span>
@@ -170,7 +143,7 @@ const Post = ({ post }) => {
         <div className="post-center">
           <p className="user-post-paragraph">{description}</p>
           <div className="user-post-images">
-            <img src={image} alt="" className="post-image" />
+            <img src={postImages[0]} alt="" className="post-image" />
           </div>
         </div>
 
@@ -180,16 +153,16 @@ const Post = ({ post }) => {
             <img className="like-icon" src="/assets/like.png" alt="like" />
             <img className="like-icon" src="/assets/heart.png" alt="heart" />
             <span className="post-like-counter">
-              {liked.length < 1 ? 0 : liked}
+              {liked?.length < 1 ? 0 : liked}
             </span>
           </div>
           <div className="post-bottom-right">
             <span className="post-comments">
-              {comments.length && comments.length < 2
-                ? comments.length < 1
+              {comments?.length && comments?.length < 2
+                ? comments?.length < 1
                   ? "0 Comment"
                   : "1 Comment"
-                : comments.length + " Comments"}
+                : comments?.length + " Comments"}
             </span>
           </div>
         </div>
@@ -222,7 +195,11 @@ const Post = ({ post }) => {
           <div className="comment-box">
             <div className="comment-image">
               <img
-                src="/assets/person/1.jpeg"
+                src={
+                  user?.profilePicture
+                    ? user?.profilePicture
+                    : placeholderProfile
+                }
                 alt="post-profile"
                 className="post-top-profile"
               />
@@ -259,7 +236,7 @@ const Post = ({ post }) => {
 
           {/* recent comment */}
           <div className="recent-comment-wrap">
-            {comments.length === 0 ||
+            {comments?.length === 0 ||
               comments?.map((comment) => (
                 <div className="recent-comment-wrap" key={comment?._id}>
                   {/* {console.log(comment?._id)} */}

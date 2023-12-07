@@ -3,51 +3,71 @@ export const Users = [
     id: 1,
     profilePicture: "https://i.ibb.co/cQ28Lqf/ezgif-com-gif-maker-6.jpg",
     username: "Safak Kocaoglu",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 2,
     profilePicture: "assets/person/2.jpeg",
     username: "Janell Shrum",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 3,
     profilePicture: "assets/person/3.jpeg",
     username: "Alex Durden",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 4,
     profilePicture: "assets/person/4.jpeg",
     username: "Dora Hawks",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 5,
     profilePicture: "assets/person/5.jpeg",
     username: "Thomas Holden",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 6,
     profilePicture: "assets/person/6.jpeg",
     username: "Shirley Beauchamp",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 7,
     profilePicture: "assets/person/7.jpeg",
     username: "Travis Bennett",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 8,
     profilePicture: "assets/person/8.jpeg",
     username: "Kristen Thomas",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 9,
     profilePicture: "assets/person/9.jpeg",
     username: "Gary Duty",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 10,
     profilePicture: "assets/person/10.jpeg",
     username: "Safak Kocaoglu",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
 ];
 
@@ -63,6 +83,8 @@ export const Posts = [
     // id: 10,
     profilePicture: "assets/person/10.jpeg",
     username: "Safak Kocaoglu",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 2,
@@ -75,6 +97,8 @@ export const Posts = [
     // id: 9,
     profilePicture: "assets/person/9.jpeg",
     username: "Gary Duty",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 3,
@@ -87,6 +111,8 @@ export const Posts = [
     // id: 8,
     profilePicture: "assets/person/8.jpeg",
     username: "Kristen Thomas",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 4,
@@ -98,6 +124,8 @@ export const Posts = [
     // id: 7,
     profilePicture: "assets/person/7.jpeg",
     username: "Travis Bennett",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 5,
@@ -109,6 +137,8 @@ export const Posts = [
     // id: 6,
     profilePicture: "assets/person/6.jpeg",
     username: "Shirley Beauchamp",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 6,
@@ -120,6 +150,8 @@ export const Posts = [
     // id: 5,
     profilePicture: "assets/person/5.jpeg",
     username: "Thomas Holden",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 7,
@@ -132,6 +164,8 @@ export const Posts = [
     // id: 4,
     profilePicture: "assets/person/4.jpeg",
     username: "Dora Hawks",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 8,
@@ -143,6 +177,8 @@ export const Posts = [
     // id: 3,
     profilePicture: "assets/person/3.jpeg",
     username: "Alex Durden",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 9,
@@ -155,6 +191,8 @@ export const Posts = [
     // id: 2,
     profilePicture: "assets/person/2.jpeg",
     username: "Janell Shrum",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
   {
     id: 10,
@@ -166,5 +204,7 @@ export const Posts = [
     // id: 1,
     profilePicture: "https://i.ibb.co/cQ28Lqf/ezgif-com-gif-maker-6.jpg",
     username: "Safak Kocaoglu",
+    description:
+      "To use a toggle event listener on an element with the id  you can create a function that toggles between different states and then use it as the callback for the event listener. Here's an example using JavaScript:",
   },
 ];

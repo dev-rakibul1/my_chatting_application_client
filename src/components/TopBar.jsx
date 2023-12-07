@@ -798,6 +798,10 @@ const TopBar = () => {
               </Menu>
             </div>
           </div>
+          {/* Register */}
+          <li>
+            <Link to="/register-layout/register">Register</Link>
+          </li>
         </div>
       </div>
     </Box>
