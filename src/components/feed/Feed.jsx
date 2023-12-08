@@ -5,9 +5,12 @@ import Share from "../share/Share";
 import "./Feed.css";
 
 const Feed = () => {
-  const { data, error, isLoading } = useGetPostApiQuery();
+  const { data, isLoading } = useGetPostApiQuery({
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="feed">

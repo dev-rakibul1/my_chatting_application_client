@@ -1,109 +1,77 @@
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
-import {
-  EmojiEmotions,
-  MoreVert,
-  Public,
-  Textsms,
-  ThumbUp,
-} from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
-import { useState } from "react";
+import { Public, Textsms, ThumbUp } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { useRef, useState } from "react";
 import { format } from "timeago.js";
+import {
+  useGetCommentQuery,
+  usePostCommentMutation,
+} from "../../redux/postApi/postApiSlice";
 import Spinner from "../../shared/spinner/Spinner";
+import SmallSpinner from "../../shared/spinner/smallSpinner";
+import PostLongMenu from "../postLongMenu/PostLongMenu";
 import "./Post.css";
+import PostComment from "./postComment/PostComment";
+const placeholderProfile =
+  "https://i.ibb.co/LY4tvxP/pngfind-com-placeholder-png-6104451.png";
 
 const Post = ({ post, isLoading }) => {
-  const [isPickerVisible, setPickerVisible] = useState(false);
-  const [currentEmoji, setCurrentEmoji] = useState(null);
-
-  function handleChange(event) {
-    setCurrentEmoji(event.target.value);
-  }
-
   const {
     description,
-    comments,
+    postComments: comments,
     postImages,
     likes,
-    id: _id,
+    _id,
     createdAt,
     user,
   } = post;
-  console.log("post image", postImages);
 
-  const placeholderProfile =
-    "https://i.ibb.co/LY4tvxP/pngfind-com-placeholder-png-6104451.png";
+  // console.log("Post page::", post);
 
+  // All useEffect method
+  const [isPickerVisible, setPickerVisible] = useState(false);
   const [liked, setLiked] = useState(likes);
   const [isLiked, setIsLiked] = useState(false);
   const [thumbLikeColor, SetThumbLikeColor] = useState(false);
+  // const [commentId, setCommentId] = useState({});
+  const comment = useRef();
 
+  // Get, POST method form Redux
+  const [postComment, { isLoading: isCommentLoading }] = usePostCommentMutation(
+    { refetchOnMountOrArgChange: true, pollingInterval: 30000 }
+  );
+
+  const { isLoading: isGetCommentLoading, data: commentData } =
+    useGetCommentQuery(_id, {
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 30000,
+    });
+
+  // User like handle
   const likeHandle = () => {
     setLiked(isLiked ? liked - 1 : liked + 1);
     setIsLiked(!isLiked);
     SetThumbLikeColor(!thumbLikeColor);
   };
 
-  const [userId, setUserId] = useState("");
-  const commentsUrl = `/v1/posts/user-comments/${userId}`;
+  // handle comment
+  const handleComment = (event) => {
+    if (event.key === "Enter") {
+      const nameValue = comment.current.value;
+      if (nameValue === "") {
+        return;
+      } else {
+        // user comment payload
+        const userCommentPayload = {
+          comment: nameValue,
+          post: _id,
+          user: user?._id,
+        };
 
-  // create random id for comment
-  function generateRandomId() {
-    const timestamp = Math.floor(Date.now() / 1000)
-      .toString(16)
-      .padStart(8, "0");
-
-    const machine = Math.floor(Math.random() * 0xffffff)
-      .toString(16)
-      .padStart(6, "0");
-
-    const process = Math.floor(Math.random() * 0xffff)
-      .toString(16)
-      .padStart(4, "0");
-
-    const counter = Math.floor(Math.random() * 0xffffff)
-      .toString(16)
-      .padStart(6, "0");
-
-    const id = `${timestamp}${machine}${process}${counter}`;
-    return id;
-  }
-  const commentId = generateRandomId();
-
-  // handle all comments
-  const handleUserAllComments = (event) => {
-    event.preventDefault();
-
-    const form = event.target;
-    const userPrimaryComments = form.userPrimaryComments.value;
-    const demo = form.demo;
-
-    console.log("demo", demo);
-
-    // create time
-    const createdAt = new Date();
-    const createdAtString = createdAt.toISOString();
-
-    const userCommentsInfo = {
-      firstComments: userPrimaryComments,
-      createdAt: createdAtString,
-      _id: commentId,
-    };
-
-    fetch(commentsUrl, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userCommentsInfo),
-    });
-    form.reset();
-  };
-
-  // handle user all comments
-  const handleUserComments = (id) => {
-    setUserId(id);
+        postComment(userCommentPayload);
+        comment.current.value = "";
+      }
+      event.preventDefault();
+    }
   };
 
   return (
@@ -133,7 +101,7 @@ const Post = ({ post, isLoading }) => {
           </div>
           <div className="post-top-right">
             <IconButton color="green" aria-label="add to shopping cart">
-              <MoreVert />
+              <PostLongMenu />
             </IconButton>
           </div>
         </div>
@@ -158,10 +126,8 @@ const Post = ({ post, isLoading }) => {
           </div>
           <div className="post-bottom-right">
             <span className="post-comments">
-              {comments?.length && comments?.length < 2
-                ? comments?.length < 1
-                  ? "0 Comment"
-                  : "1 Comment"
+              {comments?.length <= 1
+                ? comments?.length + " Comment"
                 : comments?.length + " Comments"}
             </span>
           </div>
@@ -169,219 +135,62 @@ const Post = ({ post, isLoading }) => {
 
         <hr className="like-comment-hr" />
 
-        <form onSubmit={handleUserAllComments}>
-          {/* like comment handler */}
-          <div className="like-comment-handler">
-            <div
-              className={
-                thumbLikeColor ? `like-handler liked-color` : `like-handler`
+        {/* like comment handler */}
+        <div className="like-comment-handler">
+          <div
+            className={
+              thumbLikeColor ? `like-handler liked-color` : `like-handler`
+            }
+            onClick={likeHandle}
+          >
+            <ThumbUp className="like-thumb-icon" />
+            <span className="like-thumb-text">Like</span>
+          </div>
+          <label
+            htmlFor={`comment-${_id}`}
+            className="comment-handler"
+            // onClick={() => handleUserComments(_id)}
+          >
+            <Textsms className="comment-icon" />
+            <span className="comment-text">Comment</span>
+          </label>
+        </div>
+
+        {/* comment box */}
+        <div className="comment-box">
+          {/* user comment profile pic */}
+          <div className="comment-image">
+            <img
+              src={
+                user?.profilePicture ? user?.profilePicture : placeholderProfile
               }
-              onClick={likeHandle}
-            >
-              <ThumbUp className="like-thumb-icon" />
-              <span className="like-thumb-text">Like</span>
-            </div>
-            <label
-              htmlFor={`comment-${_id}`}
-              className="comment-handler"
-              onClick={() => handleUserComments(_id)}
-            >
-              <Textsms className="comment-icon" />
-              <span className="comment-text">Comment</span>
-            </label>
-          </div>
-
-          {/* comment box */}
-          <div className="comment-box">
-            <div className="comment-image">
-              <img
-                src={
-                  user?.profilePicture
-                    ? user?.profilePicture
-                    : placeholderProfile
-                }
-                alt="post-profile"
-                className="post-top-profile"
-              />
-            </div>
-            <div
-              className={`comment-box-emoji ${
-                isPickerVisible ? "d-block" : "d-none"
-              }`}
-            >
-              <Picker
-                data={data}
-                previewPosition="none"
-                onEmojiSelect={(e) => {
-                  setCurrentEmoji(e.native);
-                  setPickerVisible(!isPickerVisible);
-                }}
-              ></Picker>
-            </div>
-            <input
-              onClick={() => handleUserComments(_id)}
-              type="text"
-              id={`comment-${_id}`}
-              placeholder="Write a comment..."
-              required
-              name="userPrimaryComments"
-              value={currentEmoji}
-              onChange={handleChange}
-            />
-            <EmojiEmotions
-              sx={{ cursor: "pointer" }}
-              onClick={() => setPickerVisible(!isPickerVisible)}
+              alt="post-profile"
+              className="post-top-profile"
             />
           </div>
+          <div
+            className={`comment-box-emoji ${
+              isPickerVisible ? "d-block" : "d-none"
+            }`}
+          ></div>
 
-          {/* recent comment */}
-          <div className="recent-comment-wrap">
-            {comments?.length === 0 ||
-              comments?.map((comment) => (
-                <div className="recent-comment-wrap" key={comment?._id}>
-                  {/* {console.log(comment?._id)} */}
-                  <div className="recent-comments">
-                    <div className="comment-image">
-                      <img
-                        src="/assets/person/1.jpeg"
-                        alt="post-profile"
-                        className="post-top-profile"
-                      />
-                    </div>
-                    <span className="comment-user-title">
-                      Katrina Turquotte
-                    </span>
-                  </div>
-                  {/* actual comment */}
-                  <article className="actual-comment">
-                    <p>{comment?.firstComments}</p>
+          <input
+            type="text"
+            ref={comment}
+            onKeyDown={handleComment}
+            id={`comment-${_id}`}
+            placeholder="Write a comment..."
+            required
+          />
+          {isCommentLoading && <SmallSpinner />}
+          {isGetCommentLoading && <SmallSpinner />}
+        </div>
 
-                    {/* ----------------user reply----------------- */}
-
-                    {/* user reply */}
-                    <div className="comment-reply-wrap">
-                      <div className="comment-reply">
-                        <span>Like</span>
-                        <label htmlFor="handleUserReply">Reply</label>
-                        <Typography
-                          variant="span"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Public
-                            sx={{ fontSize: "13px", marginRight: "3px" }}
-                          />{" "}
-                          {format(comment?.createdAt)}
-                        </Typography>
-                      </div>
-
-                      {/* reply like */}
-                      <Typography
-                        variant="span"
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <ThumbUp
-                          sx={{ fontSize: "13px", marginRight: "5px" }}
-                        />{" "}
-                        5
-                      </Typography>
-                    </div>
-                  </article>
-
-                  {/* *
-                  =========================== 
-                  REPLY COMMENT BUT UNFORTUNATELY I
-                  CAN NOT HANDLE IT AT THE MOMENT AND I WANT TO HANDLE IT AFTER
-                  SOME WORKED FINISH.
-                  ==================
-                */}
-                  {/* user second time reply / nested comment */}
-                  {/* <div className="second-time-reply">
-                    <div className="recent-comments">
-                      <div className="comment-image">
-                        <img
-                          src="/assets/person/1.jpeg"
-                          alt="post-profile"
-                          className="post-top-profile"
-                        />
-                      </div>
-                      <span className="comment-user-title">
-                        Katrina Turquotte
-                      </span>
-                    </div> */}
-                  {/* <article> */}
-                  {/* <p>Wow congratulations</p> */}
-                  {/* user reply */}
-                  {/* <div className="comment-reply-wrap">
-                        <div className="comment-reply">
-                          <span>Like</span>
-                          <label
-                            htmlFor="handleUserReply"
-                            onClick={handleUserReply}
-                          >
-                            Reply
-                          </label>
-                          <Typography
-                            variant="span"
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Public
-                              sx={{ fontSize: "13px", marginRight: "3px" }}
-                            />{" "}
-                            just now
-                          </Typography>
-                        </div> */}
-                  {/* reply like */}
-                  {/* <Typography
-                          variant="span"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <ThumbUp
-                            sx={{ fontSize: "13px", marginRight: "5px" }}
-                          />{" "}
-                          2
-                        </Typography>
-                      </div>
-                    </article> */}
-                  {/*--------------------user reply comment-------------------- */}
-                  {/* <>
-                      <div className="reply-comment-box">
-                        <div className="comment-image">
-                          <img
-                            src="/assets/person/1.jpeg"
-                            alt="post-profile"
-                            className="post-top-profile"
-                          />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Write a reply..."
-                          name="userSecondaryComments"
-                          required
-                        />
-                        <EmojiEmotions sx={{ cursor: "pointer" }} />
-                      </div>
-                    </> */}
-                  {/* </div> */}
-                </div>
-              ))}
-          </div>
-        </form>
+        {/* recent comment */}
+        {commentData?.data?.length === 0 ||
+          commentData?.data?.map((comment) => (
+            <PostComment comment={comment} user={user} key={comment._id} />
+          ))}
       </div>
     </div>
   );
