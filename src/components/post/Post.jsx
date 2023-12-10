@@ -4,7 +4,10 @@ import { useRef, useState } from "react";
 import { format } from "timeago.js";
 import {
   useGetCommentQuery,
+  useGetLikeQuery,
+  useGiveLikeMutation,
   usePostCommentMutation,
+  useRemoveLikeMutation,
 } from "../../redux/postApi/postApiSlice";
 import Spinner from "../../shared/spinner/Spinner";
 import SmallSpinner from "../../shared/spinner/smallSpinner";
@@ -19,17 +22,18 @@ const Post = ({ post, isLoading }) => {
     description,
     postComments: comments,
     postImages,
+    postLikes,
     likes,
     _id,
     createdAt,
     user,
   } = post;
 
-  // console.log("Post page::", post);
+  console.log("Post likes::", post.postLikes.length);
 
   // All useEffect method
-  const [isPickerVisible, setPickerVisible] = useState(false);
-  const [liked, setLiked] = useState(likes);
+  // const [isPickerVisible, setPickerVisible] = useState(false);
+  const [liked, setLiked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [thumbLikeColor, SetThumbLikeColor] = useState(false);
   // const [commentId, setCommentId] = useState({});
@@ -40,17 +44,47 @@ const Post = ({ post, isLoading }) => {
     { refetchOnMountOrArgChange: true, pollingInterval: 30000 }
   );
 
+  const [likeSend, { isLoading: isLikeLoading }] = useGiveLikeMutation({
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+
   const { isLoading: isGetCommentLoading, data: commentData } =
     useGetCommentQuery(_id, {
       refetchOnMountOrArgChange: true,
       pollingInterval: 30000,
     });
 
-  // User like handle
-  const likeHandle = () => {
-    setLiked(isLiked ? liked - 1 : liked + 1);
-    setIsLiked(!isLiked);
-    SetThumbLikeColor(!thumbLikeColor);
+  const { isLoading: isGetLike, data: likeData } = useGetLikeQuery(_id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+
+  const [likeRemove, { isLoading: isLikeRemoveLoading }] =
+    useRemoveLikeMutation({
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 30000,
+    });
+
+  // console.log(commentData?.data?.length);
+  const replyCommentLength = parseInt(commentData?.data?.length);
+
+  const handleLikeSend = () => {
+    const likeSendPayload = {
+      like: 1,
+      post: _id,
+      user: user?._id,
+    };
+
+    likeSend(likeSendPayload);
+  };
+
+  const handleLikedRemove = () => {
+    const likeRemovePayload = {
+      post: _id,
+      user: user?._id,
+    };
+    likeRemove(likeRemovePayload);
   };
 
   // handle comment
@@ -73,6 +107,8 @@ const Post = ({ post, isLoading }) => {
       event.preventDefault();
     }
   };
+
+  // console.log(likeData);
 
   return (
     <div className="post">
@@ -117,18 +153,23 @@ const Post = ({ post, isLoading }) => {
 
         {/* post bottom */}
         <div className="post-bottom">
-          <div className="post-bottom-left">
+          <div className="post-bottom">
             <img className="like-icon" src="/assets/like.png" alt="like" />
-            <img className="like-icon" src="/assets/heart.png" alt="heart" />
-            <span className="post-like-counter">
-              {liked?.length < 1 ? 0 : liked}
-            </span>
+            {post.postLikes.length}
+            {/* <img className="like-icon" src="/assets/heart.png" alt="heart" /> */}
+            {/* {likeData?.data?.map((like) => (
+              <LikePage
+                totalLike={post.postLikes.length}
+                like={like}
+                key={like?._id}
+              />
+            ))} */}
           </div>
           <div className="post-bottom-right">
             <span className="post-comments">
               {comments?.length <= 1
                 ? comments?.length + " Comment"
-                : comments?.length + " Comments"}
+                : comments?.length + replyCommentLength + " Comments"}
             </span>
           </div>
         </div>
@@ -137,15 +178,36 @@ const Post = ({ post, isLoading }) => {
 
         {/* like comment handler */}
         <div className="like-comment-handler">
-          <div
-            className={
-              thumbLikeColor ? `like-handler liked-color` : `like-handler`
-            }
-            onClick={likeHandle}
-          >
-            <ThumbUp className="like-thumb-icon" />
-            <span className="like-thumb-text">Like</span>
-          </div>
+          {postLikes?.length ? (
+            <>
+              {" "}
+              <div
+                className={`like-handler ${
+                  postLikes?.length ? "liked-text" : ""
+                }`}
+                onClick={handleLikedRemove}
+              >
+                <ThumbUp className="like-thumb-icon" />
+                <span className={`like-thumb-text`}>
+                  {postLikes?.length && "Liked"}
+                </span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className={`like-handler ${
+                  postLikes?.length ? "liked-text" : ""
+                }`}
+                onClick={handleLikeSend}
+              >
+                <ThumbUp className="like-thumb-icon" />
+                <span className={`like-thumb-text`}>
+                  {!postLikes?.length && "Like"}
+                </span>
+              </div>
+            </>
+          )}
           <label
             htmlFor={`comment-${_id}`}
             className="comment-handler"
@@ -169,9 +231,9 @@ const Post = ({ post, isLoading }) => {
             />
           </div>
           <div
-            className={`comment-box-emoji ${
-              isPickerVisible ? "d-block" : "d-none"
-            }`}
+          // className={`comment-box-emoji ${
+          //   isPickerVisible ? "d-block" : "d-none"
+          // }`}
           ></div>
 
           <input

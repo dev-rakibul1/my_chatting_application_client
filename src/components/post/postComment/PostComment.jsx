@@ -27,7 +27,7 @@ const PostComment = ({ comment, user }) => {
       pollingInterval: 30000,
     });
 
-  //   console.log(commentReplyData);
+  // console.log(commentReplyData);
 
   // Function to handle Enter key press
   const handleReplyComment = (event) => {

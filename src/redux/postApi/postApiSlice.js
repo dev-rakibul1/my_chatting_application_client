@@ -41,6 +41,32 @@ export const postApiSlice = createApi({
       query: (id) => `/reply/${id}`,
       providesTags: ["comments"],
     }),
+
+    // Like post
+    giveLike: builder.mutation({
+      query: (data) => ({
+        url: `/like/create-like`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+
+    // get like
+    getLike: builder.query({
+      query: (id) => `/like/${id}`,
+      providesTags: ["comments"],
+    }),
+
+    // remove like
+    removeLike: builder.mutation({
+      query: (data) => ({
+        url: `/like/remove-like`,
+        method: "DELETE",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
   }),
 });
 
@@ -50,4 +76,7 @@ export const {
   useGetCommentQuery,
   useReplyCommentMutation,
   useGetReplyCommentQuery,
+  useGiveLikeMutation,
+  useGetLikeQuery,
+  useRemoveLikeMutation,
 } = postApiSlice;

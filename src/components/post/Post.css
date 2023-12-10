@@ -243,3 +243,7 @@
 .reply-comment-box input:focus {
   outline: none;
 }
+
+.liked-text {
+  color: green;
+}
