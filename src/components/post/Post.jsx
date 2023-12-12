@@ -1,16 +1,18 @@
 import { Public, Textsms, ThumbUp } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { format } from "timeago.js";
+
 import {
   useGetCommentQuery,
   useGetLikeQuery,
   useGiveLikeMutation,
   usePostCommentMutation,
   useRemoveLikeMutation,
-} from "../../redux/postApi/postApiSlice";
+} from "../../redux/api/postApiSlice";
 import Spinner from "../../shared/spinner/Spinner";
 import SmallSpinner from "../../shared/spinner/smallSpinner";
+import { checkCurrentUser } from "../../utils/utils";
 import PostLongMenu from "../postLongMenu/PostLongMenu";
 import "./Post.css";
 import PostComment from "./postComment/PostComment";
@@ -29,15 +31,14 @@ const Post = ({ post, isLoading }) => {
     user,
   } = post;
 
-  console.log("Post likes::", post.postLikes.length);
-
-  // All useEffect method
-  // const [isPickerVisible, setPickerVisible] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [thumbLikeColor, SetThumbLikeColor] = useState(false);
-  // const [commentId, setCommentId] = useState({});
+  // console.log("Post likes::", user);
   const comment = useRef();
+  // const currentUser = postLikes.map((isUserId) => isUserId === user?._id);
+
+  const currentUser = checkCurrentUser(postLikes, user?._id);
+
+  // console.log("current user", currentUser);
+  // console.log("login user", user?._id);
 
   // Get, POST method form Redux
   const [postComment, { isLoading: isCommentLoading }] = usePostCommentMutation(
@@ -66,7 +67,8 @@ const Post = ({ post, isLoading }) => {
       pollingInterval: 30000,
     });
 
-  // console.log(commentData?.data?.length);
+  // console.log("commentData", commentData);
+
   const replyCommentLength = parseInt(commentData?.data?.length);
 
   const handleLikeSend = () => {
@@ -178,32 +180,28 @@ const Post = ({ post, isLoading }) => {
 
         {/* like comment handler */}
         <div className="like-comment-handler">
-          {postLikes?.length ? (
+          {currentUser[0] ? (
             <>
               {" "}
               <div
-                className={`like-handler ${
-                  postLikes?.length ? "liked-text" : ""
-                }`}
+                className={`like-handler ${currentUser[0] ? "liked-text" : ""}`}
                 onClick={handleLikedRemove}
               >
                 <ThumbUp className="like-thumb-icon" />
                 <span className={`like-thumb-text`}>
-                  {postLikes?.length && "Liked"}
+                  {currentUser[0] && "Liked"}
                 </span>
               </div>
             </>
           ) : (
             <>
               <div
-                className={`like-handler ${
-                  postLikes?.length ? "liked-text" : ""
-                }`}
+                className={`like-handler ${currentUser[0] ? "liked-text" : ""}`}
                 onClick={handleLikeSend}
               >
                 <ThumbUp className="like-thumb-icon" />
                 <span className={`like-thumb-text`}>
-                  {!postLikes?.length && "Like"}
+                  {!currentUser[0] && "Like"}
                 </span>
               </div>
             </>

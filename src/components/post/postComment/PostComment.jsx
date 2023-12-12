@@ -2,10 +2,11 @@ import { Public, ThumbUp } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import React, { useRef } from "react";
 import { format } from "timeago.js";
+
 import {
   useGetReplyCommentQuery,
   useReplyCommentMutation,
-} from "../../../redux/postApi/postApiSlice";
+} from "../../../redux/api/postApiSlice";
 import SmallSpinner from "../../../shared/spinner/smallSpinner";
 
 const PostComment = ({ comment, user }) => {
@@ -27,7 +28,7 @@ const PostComment = ({ comment, user }) => {
       pollingInterval: 30000,
     });
 
-  // console.log(commentReplyData);
+  // console.log(comment);
 
   // Function to handle Enter key press
   const handleReplyComment = (event) => {
@@ -60,12 +61,12 @@ const PostComment = ({ comment, user }) => {
           <div className="recent-comments">
             <div className="comment-image">
               <img
-                src="/assets/person/1.jpeg"
+                src={user?.profilePicture}
                 alt="post-profile"
                 className="post-top-profile"
               />
             </div>
-            <span className="comment-user-title">Katrina Turquotte</span>
+            <span className="comment-user-title">{`${user?.firstName} ${user?.middleName} ${user?.lastName}`}</span>
           </div>
           {/* actual comment */}
           <article className="actual-comment">
@@ -168,7 +169,7 @@ const PostComment = ({ comment, user }) => {
             <div className="reply-comment-box">
               <div className="comment-image">
                 <img
-                  src="/assets/person/1.jpeg"
+                  src={user?.profilePicture}
                   alt="post-profile"
                   className="post-top-profile"
                 />

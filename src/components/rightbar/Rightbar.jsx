@@ -1,10 +1,18 @@
 import { Add, MoreVert } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { Users } from "../../dummyData";
+import { useGetUserQuery } from "../../redux/api/userApiSlice";
 import Online from "../online/Online";
 import "./Rightbar.css";
 
 const Rightbar = () => {
+  const { data, isLoading } = useGetUserQuery({
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+
+  console.log(isLoading);
+  console.log("User data", data);
+
   return (
     <div className="rightbar">
       <div className="right-bar-wrapper">
@@ -20,8 +28,6 @@ const Rightbar = () => {
           </Link>
         </div>
 
-        {/* add */}
-        {/* <img src="/assets/ad.png" alt="add" className="add-image" /> */}
         {/* active friend */}
         <hr className="right-bar-hr" />
         <div className="right-bar-active-friend-wrapper">
@@ -30,12 +36,16 @@ const Rightbar = () => {
             <MoreVert className="right-active-bar-icons" />
           </h4>
         </div>
-        <ul className="right-bar-friend-list">
-          {/* active friend 01 */}
-          {Users?.map((user) => (
-            <Online key={user?.id} online={user} />
-          ))}
-        </ul>
+        {!data?.data.length ? (
+          "No active friends"
+        ) : (
+          <ul className="right-bar-friend-list">
+            {/* active friend 01 */}
+            {data?.data?.map((user) => (
+              <Online key={user?.id} isLoading={isLoading} online={user} />
+            ))}
+          </ul>
+        )}
         <hr className="right-bar-hr" />
 
         {/* group conversations */}

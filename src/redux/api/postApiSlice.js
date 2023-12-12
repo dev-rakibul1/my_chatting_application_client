@@ -6,7 +6,7 @@ export const postApiSlice = createApi({
   tagTypes: ["comments"],
   endpoints: (builder) => ({
     getPostApi: builder.query({
-      query: () => "/post",
+      query: () => `/post`,
       providesTags: ["comments"],
     }),
 
