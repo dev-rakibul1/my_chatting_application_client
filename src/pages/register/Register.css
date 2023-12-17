@@ -16,18 +16,25 @@ hr {
 }
 
 .register {
+  max-width: 100%;
+  /* width: 100%; */
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  padding: 15px;
+  margin: 15px auto;
+  overflow: hidden;
 }
 
 .register-wrapper {
   max-width: 100%;
+  background-color: #fff;
   border: 1px solid #ddd;
-  padding: 50px;
+  width: 100%;
+  padding: 15px;
   background: #fff;
+  overflow: hidden;
+  margin: 15px;
 }
 
 .register-form-wrapper {
@@ -37,7 +44,6 @@ hr {
 .register-input-control {
   display: flex;
   position: relative;
-  overflow: hidden;
   margin-top: 15px;
 }
 .register-radio-flex {
@@ -52,6 +58,8 @@ hr {
   height: 35px;
   padding: 10px;
   font-size: 15px;
+  border-radius: 4px;
+  border: 1px solid #040;
 }
 .register-input-control input:focus {
   outline: none;
@@ -179,4 +187,17 @@ hr {
 
 .warning-text {
   color: red !important;
+}
+
+.final-submit-pass-fields {
+  border: none;
+  outline: none;
+}
+
+.final-submit-pass-fields {
+  border: none;
+}
+
+.login-register svg {
+  color: #fff !important;
 }

@@ -52,8 +52,8 @@ const Birthday = () => {
               <Button
                 variant="contained"
                 type="submit"
-                color="primary"
-                sx={{ mt: 2, display: "inline-block" }}
+                color="success"
+                sx={{ mt: 2, display: "inline-block", bgcolor: "green" }}
               >
                 Submit
               </Button>
@@ -93,8 +93,8 @@ const Birthday = () => {
               <Button
                 variant="contained"
                 type="submit"
-                color="primary"
-                sx={{ mt: 2, display: "inline-block" }}
+                color="success"
+                sx={{ mt: 2, display: "inline-block", bgcolor: "green" }}
               >
                 Submit
               </Button>
@@ -134,8 +134,8 @@ const Birthday = () => {
               <Button
                 variant="contained"
                 type="submit"
-                color="primary"
-                sx={{ mt: 2, display: "inline-block" }}
+                color="success"
+                sx={{ mt: 2, display: "inline-block", bgcolor: "green" }}
               >
                 Submit
               </Button>

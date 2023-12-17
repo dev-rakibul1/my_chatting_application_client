@@ -3,7 +3,9 @@ import ProfileLayout from "../layout/ProfileLayout";
 import Root from "../layout/Root";
 import RegisterLayout from "../layout/registerLayout/RegisterLayout";
 import Birthday from "../pages/birthday/Birthday";
+import Documents from "../pages/docs/Documents";
 import Home from "../pages/home/Home";
+import Login from "../pages/login/Login";
 import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
 import Chats from "../pages/sidebarPages/chats/Chats";
@@ -34,9 +36,13 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/register-layout",
+    path: "/auth",
     element: <RegisterLayout />,
-    children: [{ path: "/register-layout/register", element: <Register /> }],
+    children: [
+      { path: "/auth/register", element: <Register /> },
+      { path: "/auth/login", element: <Login /> },
+      { path: "/auth/docs", element: <Documents /> },
+    ],
   },
 ]);
 

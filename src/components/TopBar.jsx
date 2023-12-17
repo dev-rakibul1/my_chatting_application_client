@@ -45,7 +45,7 @@ const TopBar = () => {
 
   return (
     // top bar container
-    <Box sx={{ backgroundColor: "green" }}>
+    <Box className="main-manu" sx={{ backgroundColor: "green" }}>
       <div className="my-chat-container">
         <div className="topBarContainer">
           {/* top bar left */}
@@ -799,9 +799,9 @@ const TopBar = () => {
             </div>
           </div>
           {/* Register */}
-          <li>
-            <Link to="/register-layout/register">Register</Link>
-          </li>
+          {/* <li>
+            <Link to="/auth/login">Login</Link>
+          </li> */}
         </div>
       </div>
     </Box>

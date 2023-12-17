@@ -5,6 +5,17 @@ export const postApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:9000/api/v1/" }),
   tagTypes: ["comments"],
   endpoints: (builder) => ({
+    // Create post
+    createPost: builder.mutation({
+      query: (data) => ({
+        url: `/post/create-post/`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+
+    // Get post
     getPostApi: builder.query({
       query: () => `/post`,
       providesTags: ["comments"],
@@ -79,4 +90,5 @@ export const {
   useGiveLikeMutation,
   useGetLikeQuery,
   useRemoveLikeMutation,
+  useCreatePostMutation
 } = postApiSlice;

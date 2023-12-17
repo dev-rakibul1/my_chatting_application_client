@@ -54,6 +54,7 @@
   border-radius: 7px;
   object-fit: contain;
   margin: 15px 0;
+  width: 100%;
 }
 
 .user-post-paragraph {

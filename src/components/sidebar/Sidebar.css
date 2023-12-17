@@ -3,6 +3,7 @@
   overflow-y: scroll;
   position: sticky;
   top: 0px;
+  margin-top: 50px;
 }
 
 ::-webkit-scrollbar {

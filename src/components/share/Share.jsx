@@ -1,27 +1,18 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { LoadingButton } from "@mui/lab";
 
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
-import {
-  EmojiEmotions,
-  Label,
-  PermMedia,
-  Public,
-  Room,
-} from "@mui/icons-material";
-import { Tooltip, Typography } from "@mui/material";
+import { Public } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/system";
-import axios from "axios";
+import { ClearIcon } from "@mui/x-date-pickers";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { toast } from "react-hot-toast";
+import { useCreatePostMutation } from "../../redux/api/postApiSlice";
+import SmallSpinner from "../../shared/spinner/smallSpinner";
+import { uploadImageToImgBB } from "../../utils/uploadImageToImgBB";
 import "./Share.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -63,14 +54,38 @@ BootstrapDialogTitle.propTypes = {
 };
 
 const Share = () => {
+  const [newEntries, setNewEntries] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const [isPostLoading, setIsPostLoading] = React.useState(false);
+  const [postFontSize, setPostFontSize] = React.useState("");
   const [isPickerVisible, setPickerVisible] = React.useState(false);
+  const [postMessageErrorHandle, setPostMessageErrorHandle] =
+    React.useState("");
   const [currentEmoji, setCurrentEmoji] = React.useState(null);
+
+  const [createPost, { isLoading }] = useCreatePostMutation({
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
 
   function handleChange(event) {
     setCurrentEmoji(event.target.value);
+
+    const form = event.target;
+    const postDes = form.defaultValue;
+    // console.dir(postDes.length);
+
+    if (postDes.length >= 0 && postDes.length <= 60) {
+      setPostFontSize("large-font");
+    }
+    if (postDes.length >= 61 && postDes.length <= 120) {
+      setPostFontSize("medium-font");
+    }
+    if (postDes.length > 120) {
+      setPostFontSize("small-font");
+    }
   }
+
+  // console.log(postFontSize);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -79,86 +94,79 @@ const Share = () => {
     setOpen(false);
   };
 
-  // handle post all data
-  const handlePostData = (event) => {
-    event.preventDefault();
-    // const description = event.form.target.value;
-    // console.dir(description);
+  // Post image
+  const handleInputChange = (event) => {
+    const postImage = event.target.files[0];
 
-    setIsPostLoading(true);
+    if (postImage) {
+      const newEntry = {
+        postImage,
+        imageUrl: URL.createObjectURL(postImage),
+      };
 
-    const form = event.target;
-    const postDescription = form.postDescription.value;
-    const postImage = form.postImage.files;
+      setNewEntries([...newEntries, newEntry]);
 
-    // user images
-    const imagesHostKey = process.env.REACT_APP_IMAGES_HOST_KEY;
-    const url = `https://api.imgbb.com/1/upload?key=${imagesHostKey}`;
-
-    const imagesFormData = new FormData();
-    const images = postImage;
-    const finalImages = images[0];
-    imagesFormData.append("image", finalImages);
-    console.log(finalImages);
-
-    fetch(url, {
-      method: "POST",
-      body: imagesFormData,
-    })
-      .then((res) => res.json())
-      .then((image) => {
-        const postInfo = {
-          description: postDescription,
-          image: image.data.display_url,
-        };
-
-        // user for post method
-        // fetch("http://localhost:1000/api/v1/posts", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(postInfo),
-        // });
-
-        axios
-          .post("/v1/posts", postInfo)
-          .then(function (response) {
-            // alert(response.data.message);
-            if (response?.data?.status) {
-              toast.success(response.data.message);
-            } else {
-              toast.error("Post fail!");
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-          .finally(() => {
-            setIsPostLoading(false);
-          });
-      })
-      .catch((error) => console.log(error.message));
-
-    form.reset();
+      // Log the image URL to the console
+      console.log("Image URL:", newEntry.imageUrl);
+    }
   };
+
+  // Remove image from the upload image
+  const removeImage = (index) => {
+    const updatedEntries = [...newEntries];
+    updatedEntries.splice(index, 1);
+    setNewEntries(updatedEntries);
+  };
+
+  const handlePostData = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const postDes = form.postDescription.value;
+
+    try {
+      const imgBBUrlsArray = [];
+
+      // Upload all images to ImgBB
+      const updatedEntries = await Promise.all(
+        newEntries.map(async (entry, index) => {
+          const imageUrl = await uploadImageToImgBB(entry.postImage);
+          imgBBUrlsArray.push(imageUrl);
+          return {
+            ...entry,
+            imageUrl,
+          };
+        })
+      );
+
+      // Update the state with ImgBB URLs
+      setNewEntries(updatedEntries);
+
+      if (!postDes && !imgBBUrlsArray.length) {
+        setPostMessageErrorHandle("Description or image required.");
+        return;
+      }else{
+        setPostMessageErrorHandle("")
+      }
+
+      const postPayload = {
+        user: "657cc481065fb89f5048452d",
+        description: postDes,
+        postImages: imgBBUrlsArray,
+      };
+      createPost(postPayload);
+
+      console.log(postPayload);
+      form.reset();
+    } catch (error) {
+      // Handle errors here
+      console.error("Error uploading images to ImgBB:", error.message);
+    }
+  };
+
+  // console.log(newEntries);
 
   return (
     <div className="share">
-      {/* ------------------- */}
-      {/* <p>{currentEmoji}</p> */}
-      {/* <button onClick={() => setPickerVisible(!isPickerVisible)}>Emoji</button> */}
-      {/* <div className={`${isPickerVisible ? "block" : "none"}`}>
-        <Picker
-          data={data}
-          previewPosition="none"
-          onEmojiSelect={(e) => {
-            setCurrentEmoji(e.native);
-            setPickerVisible(!isPickerVisible);
-          }}
-        ></Picker>
-      </div> */}
-      {/* ------------------- */}
       <div onClick={handleClickOpen}>
         <div className="share-wrapper">
           {/* share top */}
@@ -188,153 +196,8 @@ const Share = () => {
           {/* share bottom */}
           <div className="share-bottom">
             <div className="share-options">
-              {/* photo and video */}
-              <Tooltip title="Photo or Video">
-                <div className="share-option">
-                  <PermMedia
-                    htmlColor="green"
-                    className="share-icon"
-                    sx={{
-                      marginRight: "10px",
-                    }}
-                  />
-
-                  {/* <span className="share-option-text">Photo or Video</span> */}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontSize: {
-                        xs: "10px",
-                        sm: "14px",
-                        md: "14px",
-                        lg: "14px",
-                        xl: "14px",
-                      },
-                      display: {
-                        xs: "none",
-                        sm: "block",
-                        md: "block",
-                        lg: "block",
-                        xl: "block",
-                      },
-                    }}
-                    className="share-option-text"
-                  >
-                    Photo or Video
-                  </Typography>
-                </div>
-              </Tooltip>
-
-              {/* Location */}
-              <Tooltip title="Location">
-                <div className="share-option">
-                  <Room
-                    htmlColor="tomato"
-                    className="share-icon"
-                    sx={{
-                      marginRight: "10px",
-                    }}
-                  />
-
-                  {/* <span className="share-option-text">Location</span> */}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontSize: {
-                        xs: "10px",
-                        sm: "14px",
-                        md: "14px",
-                        lg: "14px",
-                        xl: "14px",
-                      },
-                      display: {
-                        xs: "none",
-                        sm: "block",
-                        md: "block",
-                        lg: "block",
-                        xl: "block",
-                      },
-                    }}
-                    className="share-option-text"
-                  >
-                    Location
-                  </Typography>
-                </div>
-              </Tooltip>
-
-              {/* Tags */}
-              <Tooltip title="Tags">
-                <div className="share-option">
-                  <Label
-                    htmlColor="blue"
-                    className="share-icon"
-                    sx={{
-                      marginRight: "10px",
-                    }}
-                  />
-
-                  {/* <span className="share-option-text">Tags</span> */}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontSize: {
-                        xs: "10px",
-                        sm: "14px",
-                        md: "14px",
-                        lg: "14px",
-                        xl: "14px",
-                      },
-                      display: {
-                        xs: "none",
-                        sm: "block",
-                        md: "block",
-                        lg: "block",
-                        xl: "block",
-                      },
-                    }}
-                    className="share-option-text"
-                  >
-                    Tags
-                  </Typography>
-                </div>
-              </Tooltip>
-
-              {/* Feelings */}
-              <Tooltip title="Feelings">
-                <div className="share-option">
-                  <EmojiEmotions
-                    htmlColor="#FFD700"
-                    className="share-icon"
-                    sx={{
-                      marginRight: "10px",
-                    }}
-                  />
-
-                  {/* <span className="share-option-text">Feelings</span> */}
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontSize: {
-                        xs: "10px",
-                        sm: "14px",
-                        md: "14px",
-                        lg: "14px",
-                        xl: "14px",
-                      },
-                      display: {
-                        xs: "none",
-                        sm: "block",
-                        md: "block",
-                        lg: "block",
-                        xl: "block",
-                      },
-                    }}
-                    className="share-option-text"
-                  >
-                    Feelings
-                  </Typography>
-                </div>
-              </Tooltip>
+              {/* Post components */}
+              {/* <PostTag /> */}
             </div>
           </div>
         </div>
@@ -372,243 +235,88 @@ const Share = () => {
                     </span>
                   </div>
                 </div>
-
                 <div className="share-top">
                   {/* <input type="text" /> */}
 
                   <textarea
-                    className="share-input"
+                    className={`share-input ${postFontSize}`}
                     name="postDescription"
                     id=""
                     cols="10"
                     rows="5"
                     placeholder="What's in your mind? Katrin..."
-                    required
                     value={currentEmoji}
                     onChange={handleChange}
                   ></textarea>
                 </div>
 
+                {/* 6. Profile pic */}
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "start",
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: "10px",
+                    }}
+                  >
+                    {newEntries.map((entry, index) => (
+                      <div key={index} className="mt-3 post-image-wrap">
+                        <img
+                          style={{
+                            width: "100px",
+                            maxWidth: "100%",
+                            height: "70px",
+                            objectFit: "cover",
+                          }}
+                          src={entry.imageUrl || ""}
+                          alt=""
+                        />
+                        <span
+                          className="remove-image-from-upload"
+                          onClick={() => removeImage(index)}
+                        >
+                          <ClearIcon style={{ fontSize: "12px" }} />
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <hr className="share-hr" />
+                  <input
+                    type="file"
+                    name="postImage"
+                    id="postImage"
+                    onChange={handleInputChange}
+                  />
+                </div>
                 {/* hr */}
                 <hr className="share-hr" />
                 {/* share bottom */}
-                <div className="share-bottom">
-                  <div className="share-options">
-                    {/* photo and video */}
-                    <Tooltip title="Photo or Video">
-                      <div className="share-option">
-                        <div className="post-images-wrapper">
-                          <input
-                            type="file"
-                            name="postImage"
-                            id="post-input-images"
-                          />
-                          <div className="post-images-icon">
-                            <PermMedia
-                              htmlColor="green"
-                              className="share-icon"
-                              sx={{
-                                marginRight: "10px",
-                              }}
-                            />
-
-                            {/* <span className="share-option-text">Photo or Video</span> */}
-                            <Typography
-                              variant="span"
-                              sx={{
-                                fontSize: {
-                                  xs: "10px",
-                                  sm: "14px",
-                                  md: "14px",
-                                  lg: "14px",
-                                  xl: "14px",
-                                },
-                                display: {
-                                  xs: "none",
-                                  sm: "block",
-                                  md: "block",
-                                  lg: "block",
-                                  xl: "block",
-                                },
-                              }}
-                              className="share-option-text"
-                            >
-                              Photo or Video
-                            </Typography>
-                          </div>
-                        </div>
-                      </div>
-                    </Tooltip>
-
-                    {/* Location */}
-                    <Tooltip title="Location">
-                      <div className="share-option">
-                        <Room
-                          htmlColor="tomato"
-                          className="share-icon"
-                          sx={{
-                            marginRight: "10px",
-                          }}
-                        />
-
-                        {/* <span className="share-option-text">Location</span> */}
-                        <Typography
-                          variant="span"
-                          sx={{
-                            fontSize: {
-                              xs: "10px",
-                              sm: "14px",
-                              md: "14px",
-                              lg: "14px",
-                              xl: "14px",
-                            },
-                            display: {
-                              xs: "none",
-                              sm: "block",
-                              md: "block",
-                              lg: "block",
-                              xl: "block",
-                            },
-                          }}
-                          className="share-option-text"
-                        >
-                          Location
-                        </Typography>
-                      </div>
-                    </Tooltip>
-
-                    {/* Tags */}
-                    <Tooltip title="Tags">
-                      <div className="share-option">
-                        <Label
-                          htmlColor="blue"
-                          className="share-icon"
-                          sx={{
-                            marginRight: "10px",
-                          }}
-                        />
-
-                        {/* <span className="share-option-text">Tags</span> */}
-                        <Typography
-                          variant="span"
-                          sx={{
-                            fontSize: {
-                              xs: "10px",
-                              sm: "14px",
-                              md: "14px",
-                              lg: "14px",
-                              xl: "14px",
-                            },
-                            display: {
-                              xs: "none",
-                              sm: "block",
-                              md: "block",
-                              lg: "block",
-                              xl: "block",
-                            },
-                          }}
-                          className="share-option-text"
-                        >
-                          Tags
-                        </Typography>
-                      </div>
-                    </Tooltip>
-
-                    <div
-                      className={`emoji-wrapper ${
-                        isPickerVisible ? "d-block" : "d-none"
-                      }`}
-                    >
-                      <Picker
-                        data={data}
-                        previewPosition="none"
-                        onEmojiSelect={(e) => {
-                          setCurrentEmoji(e.native);
-                          setPickerVisible(!isPickerVisible);
-                        }}
-                      ></Picker>
-                    </div>
-
-                    {/* Feelings */}
-                    <Tooltip title="Feelings">
-                      <div
-                        className="share-option"
-                        onClick={() => setPickerVisible(!isPickerVisible)}
-                      >
-                        <EmojiEmotions
-                          htmlColor="#FFD700"
-                          className="share-icon"
-                          sx={{
-                            marginRight: "10px",
-                          }}
-                        />
-
-                        {/* <span className="share-option-text">Feelings</span> */}
-                        <Typography
-                          variant="span"
-                          sx={{
-                            fontSize: {
-                              xs: "10px",
-                              sm: "14px",
-                              md: "14px",
-                              lg: "14px",
-                              xl: "14px",
-                            },
-                            display: {
-                              xs: "none",
-                              sm: "block",
-                              md: "block",
-                              lg: "block",
-                              xl: "block",
-                            },
-                          }}
-                          className="share-option-text"
-                        >
-                          Feelings
-                        </Typography>
-                      </div>
-                    </Tooltip>
-                  </div>
-                </div>
               </div>
             </DialogContent>
 
-            {isPostLoading ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "100%",
-                  my: 2,
-                  px: 2,
-                }}
-              >
-                <LoadingButton
-                  loading
-                  variant="outlined"
-                  sx={{ width: "100%", backgroundColor: "green" }}
-                >
-                  Fetch data
-                </LoadingButton>
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  my: 2,
-                  px: 2,
-                }}
-              >
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{ width: "100%", backgroundColor: "green" }}
-                >
-                  Submit
-                </Button>
-              </Box>
+            {postMessageErrorHandle && (
+              <>
+                <div className="" style={{ textAlign: "center", color: "red" }}>
+                  <small style={{ padding: "0 10px", display: "inline-block" }}>
+                    {postMessageErrorHandle}
+                  </small>
+                </div>
+              </>
             )}
+
+            <div className="element-center">
+              <Button
+                type="submit"
+                variant="contained"
+                color="success"
+                sx={{ width: "90%", backgroundColor: "green", m: 2 }}
+              >
+                {isLoading ? <SmallSpinner /> : "Submit"}
+              </Button>
+            </div>
           </form>
         </BootstrapDialog>
       </div>

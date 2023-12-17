@@ -16,6 +16,8 @@ import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import React from "react";
 
+// -----------------
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),

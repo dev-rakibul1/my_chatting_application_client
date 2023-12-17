@@ -115,7 +115,6 @@ const Post = ({ post, isLoading }) => {
   return (
     <div className="post">
       <div className="post-wrapper">
-        {isLoading && <Spinner />}
         {/* post top */}
         <div className="post-top">
           <div className="post-top-left">
@@ -145,6 +144,7 @@ const Post = ({ post, isLoading }) => {
         </div>
 
         {/* recent all post */}
+
         {/* post center */}
         <div className="post-center">
           <p className="user-post-paragraph">{description}</p>
@@ -252,6 +252,7 @@ const Post = ({ post, isLoading }) => {
             <PostComment comment={comment} user={user} key={comment._id} />
           ))}
       </div>
+      {isLoading && <Spinner />}
     </div>
   );
 };

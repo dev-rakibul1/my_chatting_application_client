@@ -91,6 +91,7 @@ function App() {
           mb: 2,
           backgroundColor: "#ffd3d3",
           display: "inline-block",
+          overflow: "hidden",
         }}
       >
         {open ? (

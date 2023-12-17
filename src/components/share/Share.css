@@ -134,3 +134,28 @@
   width: 50%;
   height: 50px;
 }
+
+.large-font {
+  font-size: 24px !important;
+}
+.medium-font {
+  font-size: 20px !important;
+}
+.small-font {
+  font-size: 16px !important;
+}
+
+.remove-image-from-upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background-color: green;
+  color: #fff;
+}
+
+.post-image-wrap {
+  max-width: 100%;
+  width: 100px;
+  position: relative;
+}

@@ -23,11 +23,12 @@ const Form1 = (payload) => {
             value={formData.firstName}
             onChange={handleInputFields}
             name="firstName"
+            id="firstName"
             className={` ${errors.firstName ? "warngin-border" : ""}`}
           />
-          <span className="register-icons-wrap">
+          <label className="register-icons-wrap" htmlFor="firstName">
             <AccountCircleOutlined className="register-icons" />
-          </span>
+          </label>
         </div>
         <small className="warning-text">{errors.firstName}</small>
 
@@ -40,11 +41,13 @@ const Form1 = (payload) => {
             value={formData.middleName}
             onChange={handleInputFields}
             name="middleName"
+            id="middleName"
             className={` ${errors.middleName ? "warngin-border" : ""}`}
           />
-          <span className="register-icons-wrap">
+
+          <label className="register-icons-wrap" htmlFor="middleName">
             <OpenInBrowserTwoTone className="register-icons" />
-          </span>
+          </label>
         </div>
         <small className="warning-text">{errors.middleName}</small>
 
@@ -56,11 +59,12 @@ const Form1 = (payload) => {
             name="lastName"
             value={formData.lastName}
             onChange={handleInputFields}
+            id="lastName"
             className={` ${errors.lastName ? "warngin-border" : ""}`}
           />
-          <span className="register-icons-wrap">
+          <label className="register-icons-wrap" htmlFor="lastName">
             <VerifiedUserSharp className="register-icons" />
-          </span>
+          </label>
         </div>
         <small className="warning-text">{errors.lastName}</small>
 
@@ -70,6 +74,7 @@ const Form1 = (payload) => {
             type="submit"
             color="success"
             onClick={next}
+            sx={{ textTransform: "capitalize", fontWeight: "bold" }}
           >
             Next
           </Button>

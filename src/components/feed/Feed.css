@@ -1,8 +1,8 @@
 .feed {
   overflow-y: scroll;
   height: 100vh;
+  margin-top: 50px;
 }
-
 .feed-wrapper {
   padding: 15px;
 }
